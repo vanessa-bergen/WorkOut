@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A64248FD99D00AF7EDA /* Color-Extension.swift */; };
+		C2144A672490032D00AF7EDA /* TestStuffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A662490032D00AF7EDA /* TestStuffView.swift */; };
+		C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6824900BF600AF7EDA /* HiddenModifier.swift */; };
+		C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6A249014B800AF7EDA /* SetTimesView.swift */; };
+		C2144A6D249017DF00AF7EDA /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6C249017DF00AF7EDA /* PagerView.swift */; };
+		C2144A6F2490185000AF7EDA /* PageViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6E2490185000AF7EDA /* PageViewTest.swift */; };
+		C2144A7124901A8000AF7EDA /* PageView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A7024901A8000AF7EDA /* PageView1.swift */; };
+		C2144A7324901E4F00AF7EDA /* RoundCornersModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */; };
+		C2144A75249118C400AF7EDA /* PageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A74249118C400AF7EDA /* PageView3.swift */; };
+		C2144A77249138EB00AF7EDA /* MultiSelectScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A76249138EB00AF7EDA /* MultiSelectScrollView.swift */; };
+		C2144A7924914B2D00AF7EDA /* NextNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A7824914B2D00AF7EDA /* NextNavButton.swift */; };
+		C2144A7B24914C1F00AF7EDA /* PrevNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */; };
+		C2144A7D249279E200AF7EDA /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A7C249279E200AF7EDA /* WorkoutDetailView.swift */; };
 		C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A4196248A9EBC00B93834 /* AppDelegate.swift */; };
 		C24A4199248A9EBD00B93834 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A4198248A9EBD00B93834 /* SceneDelegate.swift */; };
 		C24A419C248A9EBD00B93834 /* WorkOut.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24A419A248A9EBD00B93834 /* WorkOut.xcdatamodeld */; };
@@ -14,9 +27,35 @@
 		C24A41A0248A9EBF00B93834 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24A419F248A9EBF00B93834 /* Assets.xcassets */; };
 		C24A41A3248A9EBF00B93834 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24A41A2248A9EBF00B93834 /* Preview Assets.xcassets */; };
 		C24A41A6248A9EBF00B93834 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C24A41A4248A9EBF00B93834 /* LaunchScreen.storyboard */; };
+		C24A41AE248A9F2D00B93834 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41AD248A9F2D00B93834 /* SettingsView.swift */; };
+		C24A41B0248AAEA100B93834 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41AF248AAEA100B93834 /* TimePickerView.swift */; };
+		C24A41B2248AD01E00B93834 /* SelectedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B1248AD01E00B93834 /* SelectedCellView.swift */; };
+		C24A41B4248AD67800B93834 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B3248AD67800B93834 /* TimerView.swift */; };
+		C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */; };
+		C24A41BB248D794100B93834 /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B7248D794100B93834 /* Workout+CoreDataClass.swift */; };
+		C24A41BC248D794100B93834 /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B8248D794100B93834 /* Workout+CoreDataProperties.swift */; };
+		C24A41BD248D794100B93834 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41B9248D794100B93834 /* Exercise+CoreDataClass.swift */; };
+		C24A41BE248D794100B93834 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41BA248D794100B93834 /* Exercise+CoreDataProperties.swift */; };
+		C24A41C0248E657800B93834 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41BF248E657800B93834 /* CircularProgressBar.swift */; };
+		C24A41C2248E701F00B93834 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41C1248E701F00B93834 /* WorkoutView.swift */; };
+		C24A41C4248E732D00B93834 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41C3248E732D00B93834 /* ExercisesView.swift */; };
+		C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C2144A64248FD99D00AF7EDA /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
+		C2144A662490032D00AF7EDA /* TestStuffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStuffView.swift; sourceTree = "<group>"; };
+		C2144A6824900BF600AF7EDA /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
+		C2144A6A249014B800AF7EDA /* SetTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimesView.swift; sourceTree = "<group>"; };
+		C2144A6C249017DF00AF7EDA /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
+		C2144A6E2490185000AF7EDA /* PageViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewTest.swift; sourceTree = "<group>"; };
+		C2144A7024901A8000AF7EDA /* PageView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView1.swift; sourceTree = "<group>"; };
+		C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCornersModifier.swift; sourceTree = "<group>"; };
+		C2144A74249118C400AF7EDA /* PageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView3.swift; sourceTree = "<group>"; };
+		C2144A76249138EB00AF7EDA /* MultiSelectScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectScrollView.swift; sourceTree = "<group>"; };
+		C2144A7824914B2D00AF7EDA /* NextNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextNavButton.swift; sourceTree = "<group>"; };
+		C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrevNavButton.swift; sourceTree = "<group>"; };
+		C2144A7C249279E200AF7EDA /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
 		C24A4193248A9EBC00B93834 /* WorkOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24A4196248A9EBC00B93834 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C24A4198248A9EBD00B93834 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +65,19 @@
 		C24A41A2248A9EBF00B93834 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C24A41A5248A9EBF00B93834 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C24A41A7248A9EBF00B93834 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C24A41AD248A9F2D00B93834 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C24A41AF248AAEA100B93834 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		C24A41B1248AD01E00B93834 /* SelectedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellView.swift; sourceTree = "<group>"; };
+		C24A41B3248AD67800B93834 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		C24A41B7248D794100B93834 /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C24A41B8248D794100B93834 /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24A41B9248D794100B93834 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C24A41BA248D794100B93834 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24A41BF248E657800B93834 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		C24A41C1248E701F00B93834 /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
+		C24A41C3248E732D00B93834 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
+		C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectedCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +110,35 @@
 		C24A4195248A9EBC00B93834 /* WorkOut */ = {
 			isa = PBXGroup;
 			children = (
+				C24A41B7248D794100B93834 /* Workout+CoreDataClass.swift */,
+				C24A41B8248D794100B93834 /* Workout+CoreDataProperties.swift */,
+				C24A41B9248D794100B93834 /* Exercise+CoreDataClass.swift */,
+				C24A41BA248D794100B93834 /* Exercise+CoreDataProperties.swift */,
 				C24A4196248A9EBC00B93834 /* AppDelegate.swift */,
 				C24A4198248A9EBD00B93834 /* SceneDelegate.swift */,
 				C24A419D248A9EBD00B93834 /* ContentView.swift */,
+				C24A41C1248E701F00B93834 /* WorkoutView.swift */,
+				C2144A7C249279E200AF7EDA /* WorkoutDetailView.swift */,
+				C2144A662490032D00AF7EDA /* TestStuffView.swift */,
+				C24A41C3248E732D00B93834 /* ExercisesView.swift */,
+				C2144A6C249017DF00AF7EDA /* PagerView.swift */,
+				C2144A6E2490185000AF7EDA /* PageViewTest.swift */,
+				C2144A7024901A8000AF7EDA /* PageView1.swift */,
+				C2144A74249118C400AF7EDA /* PageView3.swift */,
+				C2144A6A249014B800AF7EDA /* SetTimesView.swift */,
+				C24A41AD248A9F2D00B93834 /* SettingsView.swift */,
+				C24A41AF248AAEA100B93834 /* TimePickerView.swift */,
+				C24A41B1248AD01E00B93834 /* SelectedCellView.swift */,
+				C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */,
+				C2144A76249138EB00AF7EDA /* MultiSelectScrollView.swift */,
+				C24A41B3248AD67800B93834 /* TimerView.swift */,
+				C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */,
+				C24A41BF248E657800B93834 /* CircularProgressBar.swift */,
+				C2144A6824900BF600AF7EDA /* HiddenModifier.swift */,
+				C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */,
+				C2144A64248FD99D00AF7EDA /* Color-Extension.swift */,
+				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
+				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
 				C24A419F248A9EBF00B93834 /* Assets.xcassets */,
 				C24A41A4248A9EBF00B93834 /* LaunchScreen.storyboard */,
 				C24A41A7248A9EBF00B93834 /* Info.plist */,
@@ -149,10 +227,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2144A75249118C400AF7EDA /* PageView3.swift in Sources */,
+				C24A41B2248AD01E00B93834 /* SelectedCellView.swift in Sources */,
+				C2144A7924914B2D00AF7EDA /* NextNavButton.swift in Sources */,
+				C2144A7124901A8000AF7EDA /* PageView1.swift in Sources */,
+				C24A41BB248D794100B93834 /* Workout+CoreDataClass.swift in Sources */,
+				C2144A7D249279E200AF7EDA /* WorkoutDetailView.swift in Sources */,
+				C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */,
+				C24A41AE248A9F2D00B93834 /* SettingsView.swift in Sources */,
+				C24A41C4248E732D00B93834 /* ExercisesView.swift in Sources */,
+				C24A41C2248E701F00B93834 /* WorkoutView.swift in Sources */,
+				C24A41B0248AAEA100B93834 /* TimePickerView.swift in Sources */,
 				C24A419C248A9EBD00B93834 /* WorkOut.xcdatamodeld in Sources */,
+				C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */,
+				C2144A672490032D00AF7EDA /* TestStuffView.swift in Sources */,
+				C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */,
 				C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */,
+				C2144A77249138EB00AF7EDA /* MultiSelectScrollView.swift in Sources */,
+				C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */,
 				C24A419E248A9EBD00B93834 /* ContentView.swift in Sources */,
+				C24A41BC248D794100B93834 /* Workout+CoreDataProperties.swift in Sources */,
+				C24A41BE248D794100B93834 /* Exercise+CoreDataProperties.swift in Sources */,
+				C24A41B4248AD67800B93834 /* TimerView.swift in Sources */,
+				C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */,
+				C24A41C0248E657800B93834 /* CircularProgressBar.swift in Sources */,
 				C24A4199248A9EBD00B93834 /* SceneDelegate.swift in Sources */,
+				C2144A7324901E4F00AF7EDA /* RoundCornersModifier.swift in Sources */,
+				C2144A7B24914C1F00AF7EDA /* PrevNavButton.swift in Sources */,
+				C2144A6F2490185000AF7EDA /* PageViewTest.swift in Sources */,
+				C24A41BD248D794100B93834 /* Exercise+CoreDataClass.swift in Sources */,
+				C2144A6D249017DF00AF7EDA /* PagerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
