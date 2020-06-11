@@ -18,7 +18,7 @@ struct SetTimesView: View {
         ["Seconds"]
     ]
 
-    @Binding var chosenExercises: Set<Exercise>
+    @Binding var chosenExercises: [Exercise]
     @Binding var exerciseTime: [Int]
     @Binding var breakTime: [Int]
     

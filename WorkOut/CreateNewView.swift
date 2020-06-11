@@ -1,5 +1,5 @@
 //
-//  PagerView.swift
+//  CreateNewView.swift
 //  WorkOut
 //
 //  Created by Vanessa Bergen on 2020-06-09.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PagerView<Content: View>: View {
+struct CreateNewView<Content: View>: View {
     let pageCount: Int
     @Binding var currentIndex: Int
     let content: Content
@@ -41,15 +41,15 @@ struct PagerView<Content: View>: View {
                 .offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
                 .offset(x: self.translation)
                 .animation(.interactiveSpring())
-                .gesture(
-                    DragGesture().updating(self.$translation) { value, state, _ in
-                        state = value.translation.width
-                    }.onEnded { value in
-                        let offset = value.translation.width / geometry.size.width
-                        let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
-                        self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
-                    }
-                )
+//                .gesture(
+//                    DragGesture().updating(self.$translation) { value, state, _ in
+//                        state = value.translation.width
+//                    }.onEnded { value in
+//                        let offset = value.translation.width / geometry.size.width
+//                        let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
+//                        self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
+//                    }
+//                )
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle("\(self.title)", displayMode: .inline)

@@ -16,7 +16,7 @@ struct ContentView: View {
     
     @State private var selectedTab = 0
     @State private var currentPage = 0
-    @State private var chosenExercises: Set<Exercise> = []
+    @State private var chosenExercises: [Exercise] = []
     @State private var exerciseSelections: [Int] = [0, 0, 10, 0]
     @State private var breakSelections: [Int] = [0, 0, 10, 0]
     
@@ -30,8 +30,8 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            PagerView(pageCount: 3, currentIndex: self.$currentPage) {
-                PageView1(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseSelections, breakTime: self.$breakSelections)
+            CreateNewView(pageCount: 3, currentIndex: self.$currentPage) {
+                ExerciseView(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseSelections, breakTime: self.$breakSelections)
                 SetTimesView(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseSelections, breakTime: self.$breakSelections)
                 PageView3(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseSelections, breakTime: self.$breakSelections)
                 

@@ -12,7 +12,7 @@ import CoreData
 struct MultiSelectedScrollView: View {
     @Environment(\.managedObjectContext) var moc
     let item: Exercise
-    @Binding var selectedItems: Set<Exercise>
+    @Binding var selectedItems: [Exercise]
     
     var body: some View {
         VStack {
@@ -37,10 +37,12 @@ struct MultiSelectedScrollView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             if self.selectedItems.contains(self.item) {
-                self.selectedItems.remove(self.item)
+                if let index = self.selectedItems.firstIndex(of: self.item) {
+                    self.selectedItems.remove(at: index)
+                }
             } else {
 
-                self.selectedItems.insert(self.item)
+                self.selectedItems.append(self.item)
             }
         }
     }

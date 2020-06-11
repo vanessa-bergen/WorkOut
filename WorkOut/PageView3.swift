@@ -13,13 +13,9 @@ struct PageView3: View {
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var currentPage: Int
-    @Binding var chosenExercises: Set<Exercise>
+    @Binding var chosenExercises: [Exercise]
     @Binding var exerciseTime: [Int]
     @Binding var breakTime: [Int]
-    
-    var listExercises: [Exercise] {
-        chosenExercises.map { $0 }
-    }
     
     @State private var newWorkoutName = ""
     
@@ -39,17 +35,22 @@ struct PageView3: View {
                 Text("\(totalTime/60) m \(totalTime%60) s")
             }
             List {
-                ForEach(listExercises, id: \.self) { exercise in
+                ForEach(chosenExercises, id: \.self) { exercise in
                     Text(exercise.wrappedName)
                 }
+                .onDelete(perform: onDelete)
+                .onMove(perform: onMove)
             }
             HStack{
                 TextField("Workout Name", text: self.$newWorkoutName)
                 Button(action: {
                     let newWorkout = Workout(context: self.moc)
                     newWorkout.name = self.newWorkoutName
-                    let set = self.chosenExercises as NSSet
-                    newWorkout.addToExercises(set)
+                    //let set = self.chosenExercises as NSSet
+                    for excercise in self.chosenExercises {
+                        newWorkout.addToExercises(excercise)
+                    }
+                    //newWorkout.addToExercises(set)
                     try? self.moc.save()
                     
                 }) {
@@ -70,6 +71,16 @@ struct PageView3: View {
                 
             }
         }
+    .navigationBarItems(leading: EditButton())
+    }
+    
+    private func onDelete(offsets: IndexSet) {
+        chosenExercises.remove(atOffsets: offsets)
+    }
+
+    func onMove(source: IndexSet, destination: Int) {
+        print("moving \(source) \(destination)")
+        chosenExercises.move(fromOffsets: source, toOffset: destination)
     }
 }
 

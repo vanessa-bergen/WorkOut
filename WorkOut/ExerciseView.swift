@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PageView1: View {
+struct ExerciseView: View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
@@ -18,7 +18,7 @@ struct PageView1: View {
     
     @Binding var currentPage: Int
     
-    @Binding var chosenExercises: Set<Exercise>
+    @Binding var chosenExercises: [Exercise]
     @Binding var exerciseTime: [Int]
     @Binding var breakTime: [Int]
     
