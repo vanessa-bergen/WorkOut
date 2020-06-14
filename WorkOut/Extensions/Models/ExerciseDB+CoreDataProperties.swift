@@ -1,8 +1,8 @@
 //
-//  Exercise+CoreDataProperties.swift
+//  ExerciseDB+CoreDataProperties.swift
 //  WorkOut
 //
-//  Created by Vanessa Bergen on 2020-06-07.
+//  Created by Vanessa Bergen on 2020-06-12.
 //  Copyright © 2020 Vanessa Bergen. All rights reserved.
 //
 //
@@ -11,15 +11,15 @@ import Foundation
 import CoreData
 
 
-extension Exercise {
+extension ExerciseDB {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Exercise> {
-        return NSFetchRequest<Exercise>(entityName: "Exercise")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ExerciseDB> {
+        return NSFetchRequest<ExerciseDB>(entityName: "ExerciseDB")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var explanation: String?
     @NSManaged public var id: UUID?
+    @NSManaged public var name: String?
     @NSManaged public var workoutName: NSSet?
     
     public var wrappedName: String {
@@ -29,13 +29,13 @@ extension Exercise {
 }
 
 // MARK: Generated accessors for workoutName
-extension Exercise {
+extension ExerciseDB {
 
     @objc(addWorkoutNameObject:)
-    @NSManaged public func addToWorkoutName(_ value: Workout)
+    @NSManaged public func addToWorkoutName(_ value: WorkoutDB)
 
     @objc(removeWorkoutNameObject:)
-    @NSManaged public func removeFromWorkoutName(_ value: Workout)
+    @NSManaged public func removeFromWorkoutName(_ value: WorkoutDB)
 
     @objc(addWorkoutName:)
     @NSManaged public func addToWorkoutName(_ values: NSSet)
