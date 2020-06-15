@@ -8,7 +8,11 @@
 
 import SwiftUI
 
-class Exercise: Codable, Identifiable {
+class Exercise: Codable, Identifiable, Equatable {
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id = UUID()
     var name: String
     var description: String

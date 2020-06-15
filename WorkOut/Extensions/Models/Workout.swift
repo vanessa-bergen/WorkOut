@@ -12,8 +12,12 @@ class Workout: Codable, Identifiable {
     let id = UUID()
     var name: String
     // number of times to repeat the set
-    var repeats: Int
-    var exerciseList: [ExerciseSet]
+    var repeats: Int = 0
+    var exerciseList: [ExerciseSet] = []
+    
+    init(name: String) {
+        self.name = name
+    }
 }
 
 class Workouts: ObservableObject {

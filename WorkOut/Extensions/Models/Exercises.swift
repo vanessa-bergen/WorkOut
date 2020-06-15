@@ -54,5 +54,4 @@ class Exercises: ObservableObject {
         exercises.append(exercise)
         save()
     }
-    
 }
