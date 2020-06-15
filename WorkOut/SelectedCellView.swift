@@ -27,6 +27,7 @@ struct SelectedCellView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             self.selectedItem = self.item
+            playSound(sound: self.selectedItem.lowercased(), type: "mp3")
         }
     }
 }

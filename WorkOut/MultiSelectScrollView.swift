@@ -11,8 +11,8 @@ import CoreData
 
 struct MultiSelectedScrollView: View {
     @Environment(\.managedObjectContext) var moc
-    let item: Exercise
-    @Binding var selectedItems: [Exercise]
+    let item: ExerciseDB
+    @Binding var selectedItems: [ExerciseDB]
     
     var body: some View {
         VStack {
@@ -52,7 +52,7 @@ struct MultiSelectedScrollView_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     
     static var previews: some View {
-        let exercise = Exercise(context: self.moc)
+        let exercise = ExerciseDB(context: self.moc)
         exercise.name = "Burpees"
         
         return MultiSelectedScrollView(item: exercise, selectedItems: .constant([exercise]))

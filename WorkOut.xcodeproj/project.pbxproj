@@ -10,6 +10,9 @@
 		C20F40412494003500355F7C /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C20F40402494003500355F7C /* beep.mp3 */; };
 		C20F40432494081400355F7C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40422494081400355F7C /* UserData.swift */; };
 		C20F40452495548A00355F7C /* TimerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40442495548A00355F7C /* TimerSetup.swift */; };
+		C20F40472496B36400355F7C /* Exercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40462496B36400355F7C /* Exercises.swift */; };
+		C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40482496B44500355F7C /* FileManger-Extension.swift */; };
+		C20F404B24979C9900355F7C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F404A24979C9900355F7C /* TestView.swift */; };
 		C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A64248FD99D00AF7EDA /* Color-Extension.swift */; };
 		C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6824900BF600AF7EDA /* HiddenModifier.swift */; };
 		C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6A249014B800AF7EDA /* SetTimesView.swift */; };
@@ -54,6 +57,9 @@
 		C20F40402494003500355F7C /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		C20F40422494081400355F7C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		C20F40442495548A00355F7C /* TimerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSetup.swift; sourceTree = "<group>"; };
+		C20F40462496B36400355F7C /* Exercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercises.swift; sourceTree = "<group>"; };
+		C20F40482496B44500355F7C /* FileManger-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManger-Extension.swift"; sourceTree = "<group>"; };
+		C20F404A24979C9900355F7C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		C2144A64248FD99D00AF7EDA /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		C2144A6824900BF600AF7EDA /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
 		C2144A6A249014B800AF7EDA /* SetTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimesView.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				C2144A64248FD99D00AF7EDA /* Color-Extension.swift */,
+				C20F40482496B44500355F7C /* FileManger-Extension.swift */,
 				C20F403D2493FD3900355F7C /* Models */,
 			);
 			path = Extensions;
@@ -124,6 +131,7 @@
 				C2144A8C2493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift */,
 				C2144A8D2493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift */,
 				C2144A822492DBA400AF7EDA /* Exercise.swift */,
+				C20F40462496B36400355F7C /* Exercises.swift */,
 				C2144A862493B84E00AF7EDA /* Workout.swift */,
 				C2144A882493B88F00AF7EDA /* ExerciseSet.swift */,
 				C20F40422494081400355F7C /* UserData.swift */,
@@ -187,6 +195,7 @@
 				C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */,
 				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
 				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
+				C20F404A24979C9900355F7C /* TestView.swift */,
 				C24A419F248A9EBF00B93834 /* Assets.xcassets */,
 				C24A41A4248A9EBF00B93834 /* LaunchScreen.storyboard */,
 				C24A41A7248A9EBF00B93834 /* Info.plist */,
@@ -283,6 +292,7 @@
 				C2144A75249118C400AF7EDA /* EditAndReviewView.swift in Sources */,
 				C24A41B2248AD01E00B93834 /* SelectedCellView.swift in Sources */,
 				C20F40432494081400355F7C /* UserData.swift in Sources */,
+				C20F40472496B36400355F7C /* Exercises.swift in Sources */,
 				C2144A7924914B2D00AF7EDA /* NextNavButton.swift in Sources */,
 				C2144A902493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift in Sources */,
 				C2144A7124901A8000AF7EDA /* ExerciseView.swift in Sources */,
@@ -296,12 +306,14 @@
 				C24A41B0248AAEA100B93834 /* TimePickerView.swift in Sources */,
 				C24A419C248A9EBD00B93834 /* WorkOut.xcdatamodeld in Sources */,
 				C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */,
+				C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */,
 				C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */,
 				C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */,
 				C2144A892493B88F00AF7EDA /* ExerciseSet.swift in Sources */,
 				C2144A77249138EB00AF7EDA /* MultiSelectScrollView.swift in Sources */,
 				C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */,
 				C2144A8E2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift in Sources */,
+				C20F404B24979C9900355F7C /* TestView.swift in Sources */,
 				C2144A872493B84E00AF7EDA /* Workout.swift in Sources */,
 				C24A419E248A9EBD00B93834 /* ContentView.swift in Sources */,
 				C24A41B4248AD67800B93834 /* TimerView.swift in Sources */,

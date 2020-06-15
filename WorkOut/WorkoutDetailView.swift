@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct WorkoutDetailView: View {
-    var workout: Workout
+    var workout: WorkoutDB
     
     var body: some View {
         VStack {

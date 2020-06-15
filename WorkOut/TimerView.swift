@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import Combine
 
 // need to add time break for in between rounds
 struct TimerView: View {
-    var workout: Workout
+    @Environment(\.presentationMode) var presentationMode
+    var workout: WorkoutDB
     
     // time for total workout, used in line progress bar
     var totalWorkoutTime: Float = 30.0
@@ -29,6 +31,7 @@ struct TimerView: View {
     @State private var exerciseSeconds: Float = 0.0
 
     @State private var isActive = false
+    @State private var firstRound = false
     
     var controlButton: String {
         self.isActive ? "pause.fill" : "play.fill"
@@ -36,6 +39,7 @@ struct TimerView: View {
     
     var timeRemaining: Float {
         exerciseTime - exerciseSeconds
+        //exerciseTime - Float(timer.seconds)
     }
     
     var percentComplete: Float {
@@ -44,7 +48,11 @@ struct TimerView: View {
     
     @State private var index = 0
     
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    //var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    //@ObservedObject var timer = TimerSetup()
+    @State var timer: Timer.TimerPublisher = Timer.publish (every: 1, on: .main, in: .common)
+    
     
     var body: some View {
         VStack {
@@ -75,7 +83,7 @@ struct TimerView: View {
                     Text(self.workout.exerciseArray[index+1].wrappedName)
                         .font(.system(.largeTitle, design: .rounded))
                 }
-                .isHidden(self.timeRemaining > 10)
+                .isHidden(hidden: self.timeRemaining > 10, remove: false)
                 .padding(.top)
             }
             
@@ -93,49 +101,68 @@ struct TimerView: View {
         }
         .padding()
         .onReceive(timer) { (time) in
+            
             guard self.isActive else { return }
-            print(time)
+            print(self.timeRemaining)
+
             if self.exerciseProgress >= 1.0 {
-                
                 self.exerciseProgress = 0
                 self.exerciseSeconds = 0
-                
+                //playSound(sound: "tone", type: "mp3")
                 // change this to end when the workout time ends instead??
                 if self.index + 1 >= self.workout.exerciseArray.count {
-                    self.timer.upstream.connect().cancel()
+                    //self.timer.upstream.connect().cancel()
                 } else {
                     self.index += 1
                 }
-                
-            }
-            
+
+            } else {
+
+            if self.firstRound {
             self.exerciseSeconds += 1
+            }
+            }
+
             self.workoutSeconds += 1
             withAnimation(.linear(duration: 1)) {
                 self.exerciseProgress += 1 / self.exerciseTime
                 self.workoutProgress += 1 / self.totalWorkoutTime
             }
-            
+            self.firstRound = true
+
         }
         // triggered when the app moves to the background
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            self.isActive = false
-        }
-        // triggered when the app enters the foreground
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            self.isActive = true
-        }
-        .navigationBarTitle("", displayMode: .inline)
-        //.navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
-        
-        // prob need to use on dissapear if we navigate away from the screen, not sure yet
-//        .onDisappear {
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
 //            self.isActive = false
 //        }
-//        .onAppear {
+//        // triggered when the app enters the foreground
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
 //            self.isActive = true
 //        }
+        .navigationBarTitle(Text(workout.wrappedName), displayMode: .inline)
+        //.navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+            Button(action: {
+                self.isActive = false
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Done")
+            }
+        )
+        
+        // prob need to use on dissapear if we navigate away from the screen, not sure yet
+        .onDisappear {
+            //self.timer.cleanup()
+            self.timer.connect().cancel()
+            
+        }
+        .onAppear {
+            //self.timer.setup()
+            self.timer = Timer.publish (every: 1, on: .main, in: .common)
+            self.timer.connect()
+            
+        }
         
     }
     

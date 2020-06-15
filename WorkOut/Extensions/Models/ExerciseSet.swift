@@ -16,4 +16,13 @@ class ExerciseSet: Codable, Identifiable {
     var time: Int
     // need to specify the order of the exercises
     var order: Int
+    
+    init(workoutID: UUID, exerciseID: UUID, exercise: Exercise, time: Int, order: Int) {
+        self.workoutID = workoutID
+        self.exerciseID = exerciseID
+        self.exercise = exercise
+        self.time = time
+        self.order = order
+    }
 }
+

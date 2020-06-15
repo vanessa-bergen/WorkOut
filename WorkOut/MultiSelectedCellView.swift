@@ -10,8 +10,8 @@ import SwiftUI
 
 struct MultiSelectedCellView: View {
     @Environment(\.managedObjectContext) var moc
-    let item: Exercise
-    @Binding var selectedItems: Set<Exercise>
+    let item: ExerciseDB
+    @Binding var selectedItems: Set<ExerciseDB>
     
     var body: some View {
         HStack {
