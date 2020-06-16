@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class Workout: Codable, Identifiable {
     let id = UUID()
@@ -17,6 +18,25 @@ class Workout: Codable, Identifiable {
     
     init(name: String) {
         self.name = name
+    }
+    
+    var totalTime: String {
+        var totalSeconds = 0
+        for exerciseSet in exerciseList {
+            totalSeconds += exerciseSet.time + exerciseSet.restTime
+        }
+        
+        let (hrs, remainder) = totalSeconds.quotientAndRemainder(dividingBy: 3600)
+        let (mins, scds) = remainder.quotientAndRemainder(dividingBy: 60)
+        if hrs > 0 {
+            return "\(hrs) Hrs \(mins) Mins"
+        } else {
+            // rounding up to a minute
+            if scds >= 30 {
+                return "\(mins + 1) Mins"
+            }
+            return "\(mins) Mins"
+        }
     }
 }
 
@@ -52,4 +72,11 @@ class Workouts: ObservableObject {
             workouts.append(workout)
             save()
         }
+    
+    func delete(_ workout: Workout) {
+        if let index = self.workouts.firstIndex(where: { $0.id == workout.id }) {
+            workouts.remove(at: index)
+        }
+        save()
+    }
 }

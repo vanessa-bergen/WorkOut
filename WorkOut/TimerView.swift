@@ -12,15 +12,12 @@ import Combine
 // need to add time break for in between rounds
 struct TimerView: View {
     @Environment(\.presentationMode) var presentationMode
-    var workout: WorkoutDB
+    var workout: Workout
     
     // time for total workout, used in line progress bar
     var totalWorkoutTime: Float = 30.0
     
-    // time for individual exercise used in circular progress bar
-    var exerciseTime: Float = 15.0
     
-    var breakTime: Float = 5.0
     
     // used to track state of total workout
     @State private var workoutProgress: Float = 0.0
@@ -33,13 +30,18 @@ struct TimerView: View {
     @State private var isActive = false
     @State private var firstRound = false
     
+    @State private var onRest = false
+    
     var controlButton: String {
         self.isActive ? "pause.fill" : "play.fill"
     }
     
     var timeRemaining: Float {
-        exerciseTime - exerciseSeconds
-        //exerciseTime - Float(timer.seconds)
+        if !onRest {
+            return exerciseTime - exerciseSeconds
+        } else {
+            return breakTime - exerciseSeconds
+        }
     }
     
     var percentComplete: Float {
@@ -47,6 +49,15 @@ struct TimerView: View {
     }
     
     @State private var index = 0
+    
+    // time for individual exercise used in circular progress bar
+    var exerciseTime: Float {
+        Float(workout.exerciseList[self.index].time)
+    }
+    
+    var breakTime: Float {
+        Float(workout.exerciseList[self.index].restTime)
+    }
     
     //var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -57,30 +68,32 @@ struct TimerView: View {
     var body: some View {
         VStack {
             
+           // Text("onrest: \(onRest ? "true" : "false"), index: \(index)")
             HStack {
                 Text("\(percentComplete, specifier: "%.0f")%")
                 ProgressBarView(value: self.$workoutProgress)
                     .frame(height: 30)
             }
             .padding(.top)
+            Text("onrest: \(onRest ? "true" : "false"), index: \(index)")
             Spacer()
-            Text(self.workout.exerciseArray[self.index].wrappedName)
+            Text(onRest ? "Rest" : self.workout.exerciseList[self.index].exercise.name)
                 .font(.system(.largeTitle, design: .rounded))
                 .bold()
                 .padding()
-            CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining)
+            CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining, onRest: onRest)
                 .padding()
                 .frame(width: 230, height: 230)
             Spacer()
             
             // show whats up next in the last ten seconds
             
-            if self.index + 1 < workout.exerciseArray.count {
+            if self.index + 1 < workout.exerciseList.count {
                 VStack(alignment: .leading) {
                     Text("Up Next: ")
                         .font(.system(.headline, design: .rounded))
                     
-                    Text(self.workout.exerciseArray[index+1].wrappedName)
+                    Text(self.workout.exerciseList[index].restTime == 0 || onRest ? self.workout.exerciseList[index+1].exercise.name : "Rest")
                         .font(.system(.largeTitle, design: .rounded))
                 }
                 .isHidden(hidden: self.timeRemaining > 10, remove: false)
@@ -106,40 +119,52 @@ struct TimerView: View {
             print(self.timeRemaining)
 
             if self.exerciseProgress >= 1.0 {
+                if self.index + 1 >= self.workout.exerciseList.count {
+                    //self.timer.upstream.connect().cancel()
+                } else {
+                    if self.onRest || !self.onRest && self.workout.exerciseList[self.index].restTime == 0 {
+                        print("onRest \(self.onRest) increase index")
+                    self.index += 1
+                    }
+                }
+                if self.workout.exerciseList[self.index].restTime != 0 {
+                    self.onRest.toggle()
+                }
+                self.simpleSuccess()
                 self.exerciseProgress = 0
                 self.exerciseSeconds = 0
                 //playSound(sound: "tone", type: "mp3")
                 // change this to end when the workout time ends instead??
-                if self.index + 1 >= self.workout.exerciseArray.count {
-                    //self.timer.upstream.connect().cancel()
-                } else {
-                    self.index += 1
-                }
+                
 
             } else {
 
-            if self.firstRound {
-            self.exerciseSeconds += 1
-            }
+                if self.firstRound {
+                    self.exerciseSeconds += 1
+                }
             }
 
             self.workoutSeconds += 1
             withAnimation(.linear(duration: 1)) {
-                self.exerciseProgress += 1 / self.exerciseTime
+                if !self.onRest {
+                    self.exerciseProgress += 1 / self.exerciseTime
+                } else {
+                    self.exerciseProgress += 1 / self.breakTime
+                }
                 self.workoutProgress += 1 / self.totalWorkoutTime
             }
             self.firstRound = true
 
         }
         // triggered when the app moves to the background
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-//            self.isActive = false
-//        }
-//        // triggered when the app enters the foreground
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-//            self.isActive = true
-//        }
-        .navigationBarTitle(Text(workout.wrappedName), displayMode: .inline)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            self.isActive = false
+        }
+        // triggered when the app enters the foreground
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            self.isActive = true
+        }
+        .navigationBarTitle(Text(workout.name), displayMode: .inline)
         //.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
@@ -166,7 +191,10 @@ struct TimerView: View {
         
     }
     
-    
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
 }
 
 //struct TimerView_Previews: PreviewProvider {

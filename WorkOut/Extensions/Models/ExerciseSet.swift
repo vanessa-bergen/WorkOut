@@ -10,7 +10,7 @@ import Foundation
 
 class ExerciseSet: Codable, Identifiable {
     let id = UUID()
-    var workoutID: UUID
+    //var workoutID: UUID
     var exerciseID: UUID
     var exercise: Exercise
     var time: Int
@@ -18,8 +18,8 @@ class ExerciseSet: Codable, Identifiable {
     // need to specify the order of the exercises
     var order: Int
     
-    init(workoutID: UUID, exerciseID: UUID, exercise: Exercise, time: Int, restTime: Int, order: Int) {
-        self.workoutID = workoutID
+    init(exerciseID: UUID, exercise: Exercise, time: Int, restTime: Int, order: Int) {
+        //self.workoutID = workoutID
         self.exerciseID = exerciseID
         self.exercise = exercise
         self.time = time
