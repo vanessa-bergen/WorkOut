@@ -20,12 +20,20 @@ class Workout: Codable, Identifiable {
         self.name = name
     }
     
-    var totalTime: String {
+    var totalSeconds: Int {
         var totalSeconds = 0
-        for exerciseSet in exerciseList {
+        for exerciseSet in self.exerciseList {
             totalSeconds += exerciseSet.time + exerciseSet.restTime
         }
+        guard let lastExerciseSet = self.exerciseList.first(where: { $0.order == self.exerciseList.count - 1 }) else {
+            return totalSeconds
+        }
         
+        // subtracting the restTime of the last exercise since that will be the end of the workout
+        return totalSeconds - lastExerciseSet.restTime
+    }
+    var totalTime: String {
+
         let (hrs, remainder) = totalSeconds.quotientAndRemainder(dividingBy: 3600)
         let (mins, scds) = remainder.quotientAndRemainder(dividingBy: 60)
         if hrs > 0 {
@@ -57,7 +65,7 @@ class Workouts: ObservableObject {
             }
         }
         
-        private func save() {
+        func save() {
            do {
             let filename = FileManager.documentsDirectoryURL
                 .appendingPathComponent(Self.workoutsKey)

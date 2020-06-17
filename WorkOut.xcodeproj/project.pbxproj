@@ -128,7 +128,6 @@
 			children = (
 				C2144A64248FD99D00AF7EDA /* Color-Extension.swift */,
 				C20F40482496B44500355F7C /* FileManger-Extension.swift */,
-				C20F403D2493FD3900355F7C /* Models */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +177,7 @@
 		C24A4195248A9EBC00B93834 /* WorkOut */ = {
 			isa = PBXGroup;
 			children = (
+				C20F403D2493FD3900355F7C /* Models */,
 				C20F403F2494001700355F7C /* Sounds */,
 				C20F403C2493FD2A00355F7C /* Extensions */,
 				C2144A842492DE2700AF7EDA /* exercises.json */,
