@@ -13,20 +13,29 @@ struct CircularProgressBar: View {
     @Binding var value: Float
     //@Binding var timeRemaining: Float
     var timeRemaining: Float
+    var onRest: Bool
+    
+    var progressColor: Color {
+        if onRest {
+            return .sunrise
+        } else {
+            return .darkTeal
+        }
+    }
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Circle()
                     .stroke(lineWidth: 50)
                     .opacity(0.3)
-                    .foregroundColor(.darkTeal)
+                    .foregroundColor(self.progressColor)
                 
                 Circle()
                     // capping the trim at 100%
                     .trim(from: 0, to: CGFloat(min(self.value, 1.0)))
                     
                     .stroke(style: StrokeStyle(lineWidth: 50.0, lineCap: .round, lineJoin: .round))
-                    .foregroundColor(.darkTeal)
+                    .foregroundColor(self.progressColor)
                     // rotate the progress circle by 270 degrees in order for it to start at the top
                     .rotationEffect(Angle(degrees: 270.0))
                     //.animation(self.isAnimated ? .linear(duration: 1) : .none)
@@ -46,8 +55,8 @@ struct CircularProgressBar: View {
     }
 }
 
-struct CircularProgressBar_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularProgressBar(value: .constant(0.4), timeRemaining: 10)
-    }
-}
+//struct CircularProgressBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CircularProgressBar(value: .constant(0.4), timeRemaining: 10)
+//    }
+//}

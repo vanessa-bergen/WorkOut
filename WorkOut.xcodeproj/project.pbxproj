@@ -13,6 +13,11 @@
 		C20F40472496B36400355F7C /* Exercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40462496B36400355F7C /* Exercises.swift */; };
 		C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40482496B44500355F7C /* FileManger-Extension.swift */; };
 		C20F404B24979C9900355F7C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F404A24979C9900355F7C /* TestView.swift */; };
+		C20F404F2499009700355F7C /* EditPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F404E2499009700355F7C /* EditPopupView.swift */; };
+		C20F4051249908B500355F7C /* ExerciseSetTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */; };
+		C20F4053249922C900355F7C /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F4052249922C900355F7C /* ButtonModifier.swift */; };
+		C20F405524995F7500355F7C /* ListWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F405424995F7500355F7C /* ListWorkoutView.swift */; };
+		C20F4057249A3F3500355F7C /* Short Beep Tone-SoundBible.com-1937840853.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C20F4056249A3F3400355F7C /* Short Beep Tone-SoundBible.com-1937840853.mp3 */; };
 		C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A64248FD99D00AF7EDA /* Color-Extension.swift */; };
 		C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6824900BF600AF7EDA /* HiddenModifier.swift */; };
 		C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A6A249014B800AF7EDA /* SetTimesView.swift */; };
@@ -60,6 +65,11 @@
 		C20F40462496B36400355F7C /* Exercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercises.swift; sourceTree = "<group>"; };
 		C20F40482496B44500355F7C /* FileManger-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManger-Extension.swift"; sourceTree = "<group>"; };
 		C20F404A24979C9900355F7C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		C20F404E2499009700355F7C /* EditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupView.swift; sourceTree = "<group>"; };
+		C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTimeView.swift; sourceTree = "<group>"; };
+		C20F4052249922C900355F7C /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
+		C20F405424995F7500355F7C /* ListWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWorkoutView.swift; sourceTree = "<group>"; };
+		C20F4056249A3F3400355F7C /* Short Beep Tone-SoundBible.com-1937840853.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Short Beep Tone-SoundBible.com-1937840853.mp3"; sourceTree = "<group>"; };
 		C2144A64248FD99D00AF7EDA /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		C2144A6824900BF600AF7EDA /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
 		C2144A6A249014B800AF7EDA /* SetTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimesView.swift; sourceTree = "<group>"; };
@@ -143,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				C2144A7E2492D16500AF7EDA /* tone.mp3 */,
+				C20F4056249A3F3400355F7C /* Short Beep Tone-SoundBible.com-1937840853.mp3 */,
 				C20F40402494003500355F7C /* beep.mp3 */,
 			);
 			path = Sounds;
@@ -180,7 +191,10 @@
 				C2144A6C249017DF00AF7EDA /* CreateNewView.swift */,
 				C2144A7024901A8000AF7EDA /* ExerciseView.swift */,
 				C2144A6A249014B800AF7EDA /* SetTimesView.swift */,
+				C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */,
 				C2144A74249118C400AF7EDA /* EditAndReviewView.swift */,
+				C20F404E2499009700355F7C /* EditPopupView.swift */,
+				C20F405424995F7500355F7C /* ListWorkoutView.swift */,
 				C24A41AD248A9F2D00B93834 /* SettingsView.swift */,
 				C24A41AF248AAEA100B93834 /* TimePickerView.swift */,
 				C24A41B1248AD01E00B93834 /* SelectedCellView.swift */,
@@ -192,6 +206,7 @@
 				C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */,
 				C24A41BF248E657800B93834 /* CircularProgressBar.swift */,
 				C2144A6824900BF600AF7EDA /* HiddenModifier.swift */,
+				C20F4052249922C900355F7C /* ButtonModifier.swift */,
 				C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */,
 				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
 				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
@@ -273,6 +288,7 @@
 			files = (
 				C2144A852492DE2700AF7EDA /* exercises.json in Resources */,
 				C2144A7F2492D16500AF7EDA /* tone.mp3 in Resources */,
+				C20F4057249A3F3500355F7C /* Short Beep Tone-SoundBible.com-1937840853.mp3 in Resources */,
 				C24A41A6248A9EBF00B93834 /* LaunchScreen.storyboard in Resources */,
 				C2144A932493CB2400AF7EDA /* workout.json in Resources */,
 				C24A41A3248A9EBF00B93834 /* Preview Assets.xcassets in Resources */,
@@ -295,16 +311,19 @@
 				C20F40472496B36400355F7C /* Exercises.swift in Sources */,
 				C2144A7924914B2D00AF7EDA /* NextNavButton.swift in Sources */,
 				C2144A902493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift in Sources */,
+				C20F4053249922C900355F7C /* ButtonModifier.swift in Sources */,
 				C2144A7124901A8000AF7EDA /* ExerciseView.swift in Sources */,
 				C2144A832492DBA400AF7EDA /* Exercise.swift in Sources */,
 				C2144A7D249279E200AF7EDA /* WorkoutDetailView.swift in Sources */,
 				C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */,
 				C2144A912493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift in Sources */,
+				C20F404F2499009700355F7C /* EditPopupView.swift in Sources */,
 				C24A41AE248A9F2D00B93834 /* SettingsView.swift in Sources */,
 				C20F40452495548A00355F7C /* TimerSetup.swift in Sources */,
 				C24A41C2248E701F00B93834 /* WorkoutView.swift in Sources */,
 				C24A41B0248AAEA100B93834 /* TimePickerView.swift in Sources */,
 				C24A419C248A9EBD00B93834 /* WorkOut.xcdatamodeld in Sources */,
+				C20F4051249908B500355F7C /* ExerciseSetTimeView.swift in Sources */,
 				C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */,
 				C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */,
 				C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */,
@@ -320,6 +339,7 @@
 				C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */,
 				C2144A812492D20500AF7EDA /* PlaySound.swift in Sources */,
 				C24A41C0248E657800B93834 /* CircularProgressBar.swift in Sources */,
+				C20F405524995F7500355F7C /* ListWorkoutView.swift in Sources */,
 				C24A4199248A9EBD00B93834 /* SceneDelegate.swift in Sources */,
 				C2144A8F2493BDE100AF7EDA /* ExerciseDB+CoreDataProperties.swift in Sources */,
 				C2144A7324901E4F00AF7EDA /* RoundCornersModifier.swift in Sources */,

@@ -17,9 +17,9 @@ struct CreateNewView<Content: View>: View {
         case 0:
             return "Step 1: Add Exercises"
         case 1:
-            return "Step 2: Set Workout Times"
+            return "Step 2: Set Default Timers"
         default:
-            return "Create Workout"
+            return "Step 3: Review Workout"
         }
     }
 
@@ -53,6 +53,7 @@ struct CreateNewView<Content: View>: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle("\(self.title)", displayMode: .inline)
+            
         }
         
     }
