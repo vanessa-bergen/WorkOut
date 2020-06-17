@@ -14,8 +14,7 @@ struct TimerView: View {
     @Environment(\.presentationMode) var presentationMode
     var workout: Workout
     
-    // time for total workout, used in line progress bar
-    var totalWorkoutTime: Float = 30.0
+    
     
     
     
@@ -44,9 +43,7 @@ struct TimerView: View {
         }
     }
     
-    var percentComplete: Float {
-        min(self.workoutSeconds / self.totalWorkoutTime * 100, 100)
-    }
+    
     
     @State private var index = 0
     
@@ -57,6 +54,15 @@ struct TimerView: View {
     
     var breakTime: Float {
         Float(workout.exerciseList[self.index].restTime)
+    }
+    
+    // time for total workout, used in line progress bar
+    var totalWorkoutTime: Float {
+        Float(workout.totalSeconds)
+    }
+    
+    var percentComplete: Float {
+        min(self.workoutSeconds / self.totalWorkoutTime * 100, 100)
     }
     
     //var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -117,33 +123,54 @@ struct TimerView: View {
             
             guard self.isActive else { return }
             print(self.timeRemaining)
+            print("workout second \(self.workoutSeconds) increment \(self.workoutProgress)  percent \(self.percentComplete)")
+            if self.workoutProgress >= 1.0 {
+                print("stopping")
+                self.timer.connect().cancel()
+            }
 
             if self.exerciseProgress >= 1.0 {
-                if self.index + 1 >= self.workout.exerciseList.count {
-                    //self.timer.upstream.connect().cancel()
+            
+                if self.index == self.workout.exerciseList.count - 1 {
+                    print("index stop")
+                    self.timer.connect().cancel()
+                    self.isActive = false
+                    
                 } else {
-                    if self.onRest || !self.onRest && self.workout.exerciseList[self.index].restTime == 0 {
+                    if self.onRest {
+                        // finished rest time, change to next exercise, set onRest to false
                         print("onRest \(self.onRest) increase index")
-                    self.index += 1
+                        self.index += 1
+                        self.onRest.toggle()
+                    } else if !self.onRest && self.workout.exerciseList[self.index].restTime == 0 {
+                        // no rest time, change to next exercise
+                        self.index += 1
+                    } else {
+                        // finised the exercise, change to the rest time
+                        self.onRest.toggle()
                     }
                 }
-                if self.workout.exerciseList[self.index].restTime != 0 {
-                    self.onRest.toggle()
-                }
+                
+                
+
+                
                 self.simpleSuccess()
+                if self.isActive {
                 self.exerciseProgress = 0
                 self.exerciseSeconds = 0
+                }
                 //playSound(sound: "tone", type: "mp3")
                 // change this to end when the workout time ends instead??
                 
 
             } else {
 
-                if self.firstRound {
+                if self.firstRound && self.isActive {
                     self.exerciseSeconds += 1
+                    
                 }
             }
-
+            if self.isActive {
             self.workoutSeconds += 1
             withAnimation(.linear(duration: 1)) {
                 if !self.onRest {
@@ -154,6 +181,7 @@ struct TimerView: View {
                 self.workoutProgress += 1 / self.totalWorkoutTime
             }
             self.firstRound = true
+            }
 
         }
         // triggered when the app moves to the background

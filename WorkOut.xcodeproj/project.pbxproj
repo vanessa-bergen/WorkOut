@@ -12,7 +12,6 @@
 		C20F40452495548A00355F7C /* TimerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40442495548A00355F7C /* TimerSetup.swift */; };
 		C20F40472496B36400355F7C /* Exercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40462496B36400355F7C /* Exercises.swift */; };
 		C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F40482496B44500355F7C /* FileManger-Extension.swift */; };
-		C20F404B24979C9900355F7C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F404A24979C9900355F7C /* TestView.swift */; };
 		C20F404F2499009700355F7C /* EditPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F404E2499009700355F7C /* EditPopupView.swift */; };
 		C20F4051249908B500355F7C /* ExerciseSetTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */; };
 		C20F4053249922C900355F7C /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F4052249922C900355F7C /* ButtonModifier.swift */; };
@@ -64,7 +63,6 @@
 		C20F40442495548A00355F7C /* TimerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSetup.swift; sourceTree = "<group>"; };
 		C20F40462496B36400355F7C /* Exercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercises.swift; sourceTree = "<group>"; };
 		C20F40482496B44500355F7C /* FileManger-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManger-Extension.swift"; sourceTree = "<group>"; };
-		C20F404A24979C9900355F7C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		C20F404E2499009700355F7C /* EditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupView.swift; sourceTree = "<group>"; };
 		C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTimeView.swift; sourceTree = "<group>"; };
 		C20F4052249922C900355F7C /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */,
 				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
 				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
-				C20F404A24979C9900355F7C /* TestView.swift */,
 				C24A419F248A9EBF00B93834 /* Assets.xcassets */,
 				C24A41A4248A9EBF00B93834 /* LaunchScreen.storyboard */,
 				C24A41A7248A9EBF00B93834 /* Info.plist */,
@@ -332,7 +329,6 @@
 				C2144A77249138EB00AF7EDA /* MultiSelectScrollView.swift in Sources */,
 				C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */,
 				C2144A8E2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift in Sources */,
-				C20F404B24979C9900355F7C /* TestView.swift in Sources */,
 				C2144A872493B84E00AF7EDA /* Workout.swift in Sources */,
 				C24A419E248A9EBD00B93834 /* ContentView.swift in Sources */,
 				C24A41B4248AD67800B93834 /* TimerView.swift in Sources */,

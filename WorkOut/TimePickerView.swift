@@ -39,12 +39,15 @@ struct TimePickerView: UIViewRepresentable {
         //pickerView(_:didSelectRow:inComponent:)
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
             self.parent.selections[component] = row
+            //self.parent.totalSeconds = self.parent.selections[0] * 60 + self.parent.selections[2]
         }
         
         func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
             let w = pickerView.frame.size.width
             return component == 0 || component == 2 ? (1 / 8) * w : (2.5 / 8) * w
         }
+        
+        
     }
     
     func makeCoordinator() -> TimePickerView.Coordinator {
@@ -53,7 +56,6 @@ struct TimePickerView: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<TimePickerView>) -> UIPickerView {
         let picker = UIPickerView(frame: .zero)
-
         picker.dataSource = context.coordinator
         picker.delegate = context.coordinator
 
@@ -65,4 +67,5 @@ struct TimePickerView: UIViewRepresentable {
             uiView.selectRow(self.selections[i], inComponent: i, animated: false)
         }
     }
+    
 }
