@@ -24,6 +24,7 @@ struct ScheduleView: View {
             Text("Select Workout To Add To Calender")
             DropDownView(selectedItem: self.$selectedWorkout, showingDropDown: self.$showingDropDown)
                 .frame(height: self.showingDropDown ? geo.size.height/2 : geo.size.height/7)
+                    //min(geo.size.height/5 * self.savedWorkouts.workouts.count, geo.size.height / 2) : geo.size.height/7)
                 
                 
             if self.accessGranted {

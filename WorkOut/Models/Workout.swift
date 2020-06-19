@@ -66,13 +66,14 @@ class Workouts: ObservableObject {
         }
         
         func save() {
-           do {
-            let filename = FileManager.documentsDirectoryURL
-                .appendingPathComponent(Self.workoutsKey)
-            let data = try JSONEncoder().encode(workouts)
-                try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
+            objectWillChange.send()
+            do {
+                let filename = FileManager.documentsDirectoryURL
+                    .appendingPathComponent(Self.workoutsKey)
+                let data = try JSONEncoder().encode(workouts)
+                    try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
             } catch {
-                print("Unable to save data.")
+                 print("Unable to save data.")
             }
         }
         

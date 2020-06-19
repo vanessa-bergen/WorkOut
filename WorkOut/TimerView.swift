@@ -8,13 +8,15 @@
 
 import SwiftUI
 import Combine
+import CoreHaptics
 
 // need to add time break for in between rounds
 struct TimerView: View {
     @Environment(\.presentationMode) var presentationMode
     var workout: Workout
+    var audioPlayer = Player()
     
-    
+    var userData = UserData()
     
     
     
@@ -69,57 +71,68 @@ struct TimerView: View {
     
     //@ObservedObject var timer = TimerSetup()
     @State var timer: Timer.TimerPublisher = Timer.publish (every: 1, on: .main, in: .common)
-    
+    @State private var engine: CHHapticEngine?
     
     var body: some View {
+        GeometryReader { geo in
         VStack {
-            
-           // Text("onrest: \(onRest ? "true" : "false"), index: \(index)")
+          
             HStack {
-                Text("\(percentComplete, specifier: "%.0f")%")
+                Text("\(self.percentComplete, specifier: "%.0f")%")
                 ProgressBarView(value: self.$workoutProgress)
-                    .frame(height: 30)
+                    
             }
+            .frame(width: geo.size.width * 0.9, height: 30)
             .padding(.top)
-            Text("onrest: \(onRest ? "true" : "false"), index: \(index)")
-            Spacer()
-            Text(onRest ? "Rest" : self.workout.exerciseList[self.index].exercise.name)
+            //Text("onrest: \(self.onRest ? "true" : "false"), index: \(self.index) total seconds \(self.totalWorkoutTime)")
+            //Spacer()
+            Text(self.onRest ? "Rest" : self.workout.exerciseList[self.index].exercise.name)
                 .font(.system(.largeTitle, design: .rounded))
                 .bold()
-                .padding()
-            CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining, onRest: onRest)
-                .padding()
-                .frame(width: 230, height: 230)
-            Spacer()
+                .padding(.bottom)
+            
+            CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining, onRest: self.onRest)
+                 //.padding()
+                .frame(width: geo.size.width * 0.6, height: geo.size.width * 0.6)
+            
+            //Spacer()
             
             // show whats up next in the last ten seconds
             
-            if self.index + 1 < workout.exerciseList.count {
-                VStack(alignment: .leading) {
+            if self.index + 1 < self.workout.exerciseList.count {
+                HStack {
                     Text("Up Next: ")
-                        .font(.system(.headline, design: .rounded))
+                        .font(.system(.title, design: .rounded))
                     
-                    Text(self.workout.exerciseList[index].restTime == 0 || onRest ? self.workout.exerciseList[index+1].exercise.name : "Rest")
+                    Text(self.workout.exerciseList[self.index].restTime == 0 || self.onRest ? self.workout.exerciseList[self.index+1].exercise.name : "Rest")
                         .font(.system(.largeTitle, design: .rounded))
+                        
                 }
                 .isHidden(hidden: self.timeRemaining > 10, remove: false)
                 .padding(.top)
             }
             
-
+            
             
             //Text("\(self.seconds)")
             Button(action: {
                 self.isActive.toggle()
+                
             }){
-                Image(systemName: controlButton)
+                Image(systemName: self.controlButton)
                     .renderingMode(.original)
                     .font(.system(size: 60))
-                    .padding()
+                    .padding(.bottom)
+                    
             }
         }
-        .padding()
-        .onReceive(timer) { (time) in
+        
+        }
+        
+        
+        
+        
+        .onReceive(self.timer) { (time) in
             
             guard self.isActive else { return }
             print(self.timeRemaining)
@@ -154,12 +167,16 @@ struct TimerView: View {
                 
 
                 
-                self.simpleSuccess()
+                //self.simpleSuccess()
                 if self.isActive {
                 self.exerciseProgress = 0
                 self.exerciseSeconds = 0
                 }
-                //playSound(sound: "tone", type: "mp3")
+                
+                self.audioPlayer.playSound(soundEnabled: self.userData.soundEnabled, sound: self.userData.sound, vibrationEnabled: self.userData.vibrationEnabled)
+                
+                
+                
                 // change this to end when the workout time ends instead??
                 
 
@@ -192,7 +209,8 @@ struct TimerView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.isActive = true
         }
-        .navigationBarTitle(Text(workout.name), displayMode: .inline)
+        
+        .navigationBarTitle(Text(self.workout.name), displayMode: .inline)
         //.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
@@ -205,6 +223,7 @@ struct TimerView: View {
         )
         
         // prob need to use on dissapear if we navigate away from the screen, not sure yet
+            // need to enable the timer to keep going in the background too
         .onDisappear {
             //self.timer.cleanup()
             self.timer.connect().cancel()
@@ -214,15 +233,14 @@ struct TimerView: View {
             //self.timer.setup()
             self.timer = Timer.publish (every: 1, on: .main, in: .common)
             self.timer.connect()
-            
+  
         }
+    
         
     }
     
-    func simpleSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
+    
+
 }
 
 //struct TimerView_Previews: PreviewProvider {

@@ -24,52 +24,73 @@ struct DropDownView: View {
                 }) {
                     HStack {
                         Text(self.selectedItem?.name ?? "Select One")
+                            .foregroundColor(.white)
+                            .font(.headline)
                         Spacer()
                         Text(self.selectedItem?.totalTime ?? "")
+                            .foregroundColor(.white)
                         Spacer()
                         Image(systemName: self.showingDropDown ? "chevron.up" : "chevron.down")
+                            .imageScale(.large)
+                            .foregroundColor(.white)
                     }
                     .padding()
                 }
                 
                 .frame(width: geo.size.width * 0.9)
+                .background(LinearGradient(gradient: Gradient(colors: [.darkestTeal, .darkTeal]), startPoint: .leading, endPoint: .trailing))
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .strokeBorder(Color.darkTeal.opacity(0.5), lineWidth: 2)
+                        .strokeBorder(Color.white, lineWidth: 2)
                 )
+                .shadow(radius: 5)
+                
                 if self.showingDropDown {
-                ScrollView {
-                    VStack(spacing: 0){
-                        
-                            ForEach(self.savedWorkouts.workouts) { workout in
-                                VStack(alignment: .leading) {
-                                    Text(workout.name)
-                                        .font(.headline)
-                                    Text(workout.totalTime)
-                                        .font(.subheadline)
+                    ScrollView {
+                        VStack(spacing: 0){
+                            
+                                ForEach(self.savedWorkouts.workouts) { workout in
+                                    VStack(alignment: .leading) {
+                                        Text(workout.name)
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                        Text(workout.totalTime)
+                                            .font(.subheadline)
+                                            .foregroundColor(.white)
+                                            
+                                    }
+                                    .padding()
+                                    // setting the height of each VStack in the scroll view
+                                    .frame(width: geo.size.width * 0.9, alignment: .leading)
+                                    .background(LinearGradient(gradient: Gradient(colors: [.darkestTeal, .darkTeal]), startPoint: .leading, endPoint: .trailing))
+                                    .overlay(
+                                        Rectangle()
+                                            .stroke(Color.white, lineWidth: 1)
+                                    )
+                                    .shadow(radius: 10)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        self.selectedItem = workout
+                                        withAnimation {
+                                            self.showingDropDown.toggle()
+                                        }
+                                    }
                                         
                                 }
-                                .padding()
-                                // setting the height of each VStack in the scroll view
-                                .frame(width: geo.size.width * 0.9, height: geo.size.height / 5, alignment: .leading)
-                                .overlay(Rectangle().stroke(Color.darkTeal, lineWidth: 1))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    self.selectedItem = workout
-                                }
-                                    
                             }
+                        //.frame(width: geo.size.width * 0.9, height: geo.size.height / 2.0)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .strokeBorder(Color.white, lineWidth: 2)
+                        )
+                        
                         }
-                    }
-                    //.frame(width: geo.size.width * 0.9, height: geo.size.height / 2.0)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .strokeBorder(Color.darkTeal.opacity(0.5), lineWidth: 2)
-                    )
-                    //.isHidden(hidden: self.showingDropDown, remove: true)
-            }
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        
+                        //.isHidden(hidden: self.showingDropDown, remove: true)
+                }
                 Spacer()
             }
         }

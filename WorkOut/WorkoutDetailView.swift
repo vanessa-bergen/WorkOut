@@ -9,26 +9,52 @@
 import SwiftUI
 
 struct WorkoutDetailView: View {
-    var workout: WorkoutDB
+    
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var savedWorkouts: Workouts
+    
+    @Binding var workout: Workout
+    
+    @State private var showingDeleteAlert = false
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(workout.exerciseArray, id: \.self) { exercise in
-                    Text(exercise.wrappedName)
-                }
-            }
-            NavigationLink(destination: TimerView(workout: workout)) {
-                HStack {
-                    Image(systemName: "play.fill")
-                        .renderingMode(.original)
+        VStack(alignment: .leading) {
+            Text(workout.totalTime)
+                .padding(.leading)
+                .font(.title)
+            ListWorkoutView(chosenExercises: $workout.exerciseList)
+            HStack {
+                Spacer()
+                NavigationLink(destination: TimerView(workout: workout)) {
+                    
                     Text("Start Workout")
-                        .foregroundColor(.black)
+                        .buttonStyle()
+                    
                 }
+                .padding()
+                Spacer()
             }
-            .padding()
         }
-        .navigationBarTitle(workout.wrappedName)
+        .navigationBarTitle(workout.name)
+        .navigationBarItems(trailing: Button(action: {
+            self.showingDeleteAlert = true
+        }) {
+            Image(systemName: "trash")
+        })
+        .alert(isPresented: $showingDeleteAlert) {
+            Alert(title:
+                Text("Delete Workout"),
+                message: Text("Are you sure?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    self.deleteWorkout()
+                },
+                secondaryButton: .cancel())
+        }
+    }
+    
+    func deleteWorkout() {
+        self.savedWorkouts.delete(workout)
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

@@ -7,25 +7,32 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct SettingsView: View {
     @ObservedObject var userData = UserData()
-    
+
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Timer Sound")) {
-                    Toggle(isOn: $userData.enabled) {
+                    Toggle(isOn: $userData.soundEnabled) {
                         Text("Sound Enabled")
                     }
-                    if userData.enabled {
+                    if userData.soundEnabled {
                         List {
-                            ForEach(userData.sounds, id: \.self) { sound in
-                                SelectedCellView(item: sound, selectedItem: self.$userData.sound)
+                            ForEach(userData.sounds, id: \.self) { soundName in
+                                SelectedCellView(item: soundName, selectedItem: self.$userData.sound)
                             }
                         }
                     }
                     
+                }
+                
+                Section(header: Text("Vibration")) {
+                    Toggle(isOn: $userData.vibrationEnabled) {
+                        Text("Vibration Enabled")
+                    }
                 }
                     
             }
@@ -33,6 +40,8 @@ struct SettingsView: View {
         }
     }
 }
+    
+    
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

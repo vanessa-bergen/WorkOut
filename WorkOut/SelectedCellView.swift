@@ -7,12 +7,14 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct SelectedCellView: View {
+    var audioPlayer = Player()
     
     let item: String
     @Binding var selectedItem: String
-    
+
     var body: some View {
         HStack {
             Text(item)
@@ -27,7 +29,8 @@ struct SelectedCellView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             self.selectedItem = self.item
-            playSound(sound: self.selectedItem.lowercased(), type: "mp3")
+            self.audioPlayer.playSound(soundEnabled: true, sound: self.selectedItem, vibrationEnabled: false)
+            
         }
     }
 }

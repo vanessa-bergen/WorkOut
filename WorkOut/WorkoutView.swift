@@ -9,21 +9,17 @@
 import SwiftUI
 
 struct WorkoutView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: WorkoutDB.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutDB.name, ascending: true)]
-    ) var workouts: FetchedResults<WorkoutDB>
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(
+//        entity: WorkoutDB.entity(),
+//        sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutDB.name, ascending: true)]
+//    ) var workouts: FetchedResults<WorkoutDB>
+    
+    @EnvironmentObject var workouts: Workouts
     
     @Binding var selectedTab: Int
     
-    @State private var selectedWorkout = ""
-    @State private var showingExerciseView = false
     
-    @State private var currentPage = 0
-    @State private var chosenExercises: Set<ExerciseDB> = []
-    @State private var exerciseSelections: [Int] = [0, 0, 10, 0]
-    @State private var breakSelections: [Int] = [0, 0, 10, 0]
     
     var body: some View {
         NavigationView {
@@ -32,15 +28,16 @@ struct WorkoutView: View {
 
                     HStack {
                         Text("Create New Workout")
-                            .foregroundColor(.darkBlue)
+                            .foregroundColor(.white)
                             .bold()
+                            
                         Spacer()
                         Image(systemName: "chevron.right")
-                            .foregroundColor(.darkBlue)
+                            .foregroundColor(.white)
                     }
                     .padding()
                     .frame(width: geometry.size.width * 0.9)
-                    .background(LinearGradient(gradient: Gradient(colors: [.darkTeal, .lightTeal]), startPoint: .leading, endPoint: .trailing))
+                    .background(LinearGradient(gradient: Gradient(colors: [.darkestTeal, .darkTeal]), startPoint: .leading, endPoint: .trailing))
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .onTapGesture {
                         self.selectedTab = 1
@@ -49,41 +46,44 @@ struct WorkoutView: View {
                 
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .strokeBorder(Color.gray.opacity(0.5), lineWidth: 2)
+                            .strokeBorder(Color.white, lineWidth: 2)
                     )
+                        .shadow(color: Color.gray.opacity(0.5), radius: 5)
                     
                         
                     .padding()
                     ScrollView {
                         VStack(spacing: 10) {
-                            ForEach(self.workouts, id: \.self) { workout in
-                                NavigationLink(destination: WorkoutDetailView(workout: workout)) {
+                            ForEach(self.workouts.workouts) { workout in
+                                NavigationLink(destination: WorkoutDetailView(workout: .constant(workout))) {
                                     HStack {
                                         VStack(alignment: .leading) {
-                                            Text(workout.wrappedName)
-                                                .foregroundColor(.darkBlue)
+                                            Text(workout.name)
+                                                .foregroundColor(.white)
                                                 .font(.headline)
                                                 .bold()
-                                            Text("Total Time: 30 Mins")
-                                                .foregroundColor(.darkBlue)
+                                            
+                                            Text(workout.totalTime)
+                                                .foregroundColor(.white)
                                                 .font(.subheadline)
                                         }
                                         Spacer()
                                         Image(systemName: "chevron.right")
-                                            .foregroundColor(.darkBlue)
+                                            .foregroundColor(.white)
                                         
                                     }
                                 }
                                 .padding()
                                 .frame(width: geometry.size.width * 0.9)
-                                .background(LinearGradient(gradient: Gradient(colors: [.darkTeal, .lightTeal]), startPoint: .leading, endPoint: .trailing))
+                                .background(LinearGradient(gradient: Gradient(colors: [.darkestTeal, .darkTeal]), startPoint: .leading, endPoint: .trailing))
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                 
                             
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 16)
-                                        .strokeBorder(Color.gray.opacity(0.5), lineWidth: 2)
+                                        .strokeBorder(Color.lightTeal, lineWidth: 2)
                                 )
+                                
                                 
                                 
                             }
