@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Combine
-import CoreHaptics
 
 // need to add time break for in between rounds
 struct TimerView: View {
@@ -45,6 +44,11 @@ struct TimerView: View {
         }
     }
     
+    var nextExercise: String {
+        self.workout.exerciseList[self.index].restTime == 0 || self.onRest ? self.workout.exerciseList[self.index+1].exercise.name : "Rest"
+       
+    }
+    
     
     
     @State private var index = 0
@@ -71,7 +75,6 @@ struct TimerView: View {
     
     //@ObservedObject var timer = TimerSetup()
     @State var timer: Timer.TimerPublisher = Timer.publish (every: 1, on: .main, in: .common)
-    @State private var engine: CHHapticEngine?
     
     var body: some View {
         GeometryReader { geo in
@@ -99,18 +102,15 @@ struct TimerView: View {
             
             // show whats up next in the last ten seconds
             
-            if self.index + 1 < self.workout.exerciseList.count {
-                HStack {
-                    Text("Up Next: ")
-                        .font(.system(.title, design: .rounded))
-                    
-                    Text(self.workout.exerciseList[self.index].restTime == 0 || self.onRest ? self.workout.exerciseList[self.index+1].exercise.name : "Rest")
-                        .font(.system(.largeTitle, design: .rounded))
-                        
-                }
-                .isHidden(hidden: self.timeRemaining > 10, remove: false)
-                .padding(.top)
-            }
+            
+            
+            Text(self.index != self.workout.exerciseList.count - 1 ? "Up Next: \(self.nextExercise)" : "Up Next: Workout Complete!")
+                .font(.system(.largeTitle, design: .rounded))
+                
+            .isHidden(hidden: self.timeRemaining > 10, remove: false)
+            .padding(.top)
+                
+            
             
             
             
@@ -136,6 +136,7 @@ struct TimerView: View {
             
             guard self.isActive else { return }
             print(self.timeRemaining)
+            
             print("workout second \(self.workoutSeconds) increment \(self.workoutProgress)  percent \(self.percentComplete)")
             if self.workoutProgress >= 1.0 {
                 print("stopping")
@@ -198,6 +199,15 @@ struct TimerView: View {
                 self.workoutProgress += 1 / self.totalWorkoutTime
             }
             self.firstRound = true
+            }
+            if self.userData.voiceEnabled {
+                if self.timeRemaining == 3 && self.index != self.workout.exerciseList.count - 1{
+                    if let accent = self.userData.accents[self.userData.voice] {
+                        self.audioPlayer.playVoice(word: self.nextExercise, accent: accent)
+                    } else {
+                        self.audioPlayer.playVoice(word: self.nextExercise, accent: "en-ca")
+                    }
+                }
             }
 
         }

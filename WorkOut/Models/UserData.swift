@@ -10,11 +10,27 @@ import Foundation
 import Combine
 import AudioToolbox
 class UserData: ObservableObject {
+    static let voiceEnabledKey = "VoiceEnabled"
+    static let voiceKey = "Voice"
     static let soundEnabledKey = "SoundEnabled"
     static let soundKey = "Sound"
     static let vibrationEnabledKey = "VibrationEnabled"
 
     public var sounds = ["Beep", "Bell", "Ding", "Electronic", "Pew", "Ping", "Tone"]
+    
+    public var accents = ["Australian" : "en-AU", "British" : "en-GB", "Canadian" : "en-ca", "Irish" : "en-ie", "South African" : "en-za", "Indian" : "en-in"]
+    
+    @Published var voiceEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(self.voiceEnabled, forKey: Self.voiceEnabledKey)
+        }
+    }
+    
+    @Published var voice: String {
+        didSet {
+            UserDefaults.standard.set(self.voice, forKey: Self.voiceKey)
+        }
+    }
     
     @Published var soundEnabled: Bool {
         didSet {
@@ -37,11 +53,14 @@ class UserData: ObservableObject {
     
     
     init() {
-        // if no user data saved for enabled, default it to true
+        // if no user data saved for enabled, default voice, sound and vibrate to true
+        UserDefaults.standard.register(defaults: [Self.voiceEnabledKey: true])
         UserDefaults.standard.register(defaults: [Self.soundEnabledKey : true])
         UserDefaults.standard.register(defaults: [Self.vibrationEnabledKey : true])
         
+        self.voiceEnabled = UserDefaults.standard.bool(forKey: Self.voiceEnabledKey)
         self.soundEnabled = UserDefaults.standard.bool(forKey: Self.soundEnabledKey)
+        self.voice = UserDefaults.standard.string(forKey: Self.voiceKey) ?? "Canadian"
         self.sound = UserDefaults.standard.string(forKey: Self.soundKey) ?? "Beep"
         self.vibrationEnabled = UserDefaults.standard.bool(forKey: Self.vibrationEnabledKey)
         

@@ -12,6 +12,7 @@ import AVFoundation
 class Player {
     var toneSoundEffect: AVAudioPlayer?
     let session = AVAudioSession.sharedInstance()
+    let synthesizer = AVSpeechSynthesizer()
     
     init() {
         do {
@@ -24,9 +25,21 @@ class Player {
             print("Failed to set the audio session category and mode: \(error.localizedDescription)")
         }
     }
-
+    
+    func playVoice(word: String, accent: String) {
+        let speech = AVSpeechUtterance(string: word)
+        speech.voice = AVSpeechSynthesisVoice(language: accent)
+        speech.rate = 0.4
+        
+        synthesizer.speak(speech)
+        
+    }
 
     func playSound(soundEnabled: Bool, sound: String, vibrationEnabled: Bool) {
+        
+        if vibrationEnabled {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
         
         if let path = Bundle.main.path(forResource: sound, ofType: "mp3") {
             let url = URL(fileURLWithPath: path)
@@ -36,9 +49,7 @@ class Player {
                     toneSoundEffect = try AVAudioPlayer(contentsOf: url)
                     toneSoundEffect?.play()
                 }
-                if vibrationEnabled {
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                }
+                
                 
             } catch {
                 print("Could not find and play the sound file.")

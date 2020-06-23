@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import AudioToolbox
+import AVFoundation
 
 struct SettingsView: View {
     @ObservedObject var userData = UserData()
@@ -15,21 +15,41 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Timer Sound")) {
-                    Toggle(isOn: $userData.soundEnabled) {
-                        Text("Sound Enabled")
+                
+                Section(header: Text("Voice Upcoming Exercises")) {
+                    Toggle(isOn: $userData.voiceEnabled) {
+                        Text("Voice Enabled")
                     }
-                    if userData.soundEnabled {
+                    
+                }
+                if userData.voiceEnabled {
+                    Section(header: Text("Configure Accent")) {
                         List {
-                            ForEach(userData.sounds, id: \.self) { soundName in
-                                SelectedCellView(item: soundName, selectedItem: self.$userData.sound)
+                            ForEach(userData.accents.keys.sorted(), id: \.self) { accent in
+                                SelectedCellView(item: accent, selectedItem: self.$userData.voice, alert: false, accents: self.userData.accents)
                             }
                         }
+                    }
+                }
+                
+                Section(header: Text("Alert When Timer Ends")) {
+                    
+                    Toggle(isOn: $userData.soundEnabled) {
+                        Text("Alert Enabled")
+                    }
+                    if userData.soundEnabled {
+                        
+                        List {
+                            ForEach(userData.sounds, id: \.self) { soundName in
+                                SelectedCellView(item: soundName, selectedItem: self.$userData.sound, alert: true, accents: self.userData.accents)
+                            }
+                        }
+                        
                     }
                     
                 }
                 
-                Section(header: Text("Vibration")) {
+                Section(header: Text("Vibrate When Timer Ends")) {
                     Toggle(isOn: $userData.vibrationEnabled) {
                         Text("Vibration Enabled")
                     }
