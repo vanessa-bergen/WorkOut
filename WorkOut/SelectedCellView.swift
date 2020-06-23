@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
-import AudioToolbox
 
 struct SelectedCellView: View {
     var audioPlayer = Player()
     
     let item: String
     @Binding var selectedItem: String
+    var alert: Bool
+    var accents: [String : String]
 
     var body: some View {
         HStack {
@@ -28,8 +29,14 @@ struct SelectedCellView: View {
         // making the whole row tappable
         .contentShape(Rectangle())
         .onTapGesture {
+            
             self.selectedItem = self.item
-            self.audioPlayer.playSound(soundEnabled: true, sound: self.selectedItem, vibrationEnabled: false)
+            
+            if self.alert {
+                self.audioPlayer.playSound(soundEnabled: true, sound: self.selectedItem, vibrationEnabled: false)
+            } else {
+                self.audioPlayer.playVoice(word: "Hello, what a great time to workout!", accent: self.accents[self.item]!)
+            }
             
         }
     }

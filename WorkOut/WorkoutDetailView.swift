@@ -22,7 +22,39 @@ struct WorkoutDetailView: View {
             Text(workout.totalTime)
                 .padding(.leading)
                 .font(.title)
-            ListWorkoutView(chosenExercises: $workout.exerciseList)
+            List {
+                ForEach(self.workout.exerciseList) { exercise in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(exercise.exercise.name)
+                                    .foregroundColor(.darkestTeal)
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(exercise.time / 60):\(exercise.time % 60)")
+                                    .timeStlye(rest: false)
+                            }
+                            
+                            if exercise.order != self.workout.exerciseList.count-1 {
+                                HStack {
+                                    Text("Rest")
+                                        .foregroundColor(.darkSunrise)
+                                        .font(.subheadline)
+                                    Spacer()
+                                    if exercise.restTime > 0 {
+                                        Text("\(exercise.restTime / 60):\(exercise.restTime % 60)")
+                                            .timeStlye(rest: true)
+                                    } else {
+                                        Text("No Rest")
+                                            .timeStlye(rest: true)
+                                    }
+                                }
+                                .padding(.top, 10)
+                            }
+                        }
+                    }
+                }
+            }
             HStack {
                 Spacer()
                 NavigationLink(destination: TimerView(workout: workout)) {
@@ -36,11 +68,21 @@ struct WorkoutDetailView: View {
             }
         }
         .navigationBarTitle(workout.name)
-        .navigationBarItems(trailing: Button(action: {
-            self.showingDeleteAlert = true
-        }) {
-            Image(systemName: "trash")
-        })
+        .navigationBarItems(trailing:
+            HStack {
+                Button(action: {
+                    
+                }) {
+                    Image(systemName: "square.and.pencil")
+                }
+                Button(action: {
+                    self.showingDeleteAlert = true
+                }) {
+                    Image(systemName: "trash")
+                }
+                
+            }
+        )
         .alert(isPresented: $showingDeleteAlert) {
             Alert(title:
                 Text("Delete Workout"),

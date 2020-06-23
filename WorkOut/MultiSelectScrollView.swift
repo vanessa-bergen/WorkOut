@@ -13,6 +13,8 @@ struct MultiSelectedScrollView: View {
     //@Environment(\.managedObjectContext) var moc
     let item: Exercise
     @Binding var selectedItems: [ExerciseSet]
+    @Binding var exerciseTime: Int
+    @Binding var breakTime: Int
     
     var contains: Bool {
         return selectedItems.contains(where: { $0.exercise == item })
@@ -50,7 +52,7 @@ struct MultiSelectedScrollView: View {
             } else {
 
                 //self.selectedItems.append(self.item)
-                let newSet = ExerciseSet(exerciseID: self.item.id, exercise: self.item, time: 90, restTime: 10, order: self.selectedItems.count)
+                let newSet = ExerciseSet(exerciseID: self.item.id, exercise: self.item, time: self.exerciseTime, restTime: self.breakTime, order: self.selectedItems.count)
                 self.selectedItems.append(newSet)
                 
             }

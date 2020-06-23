@@ -28,9 +28,10 @@ struct SetTimesView: View {
     @State private var exerciseSelections = [0,0,0,0]
     @State private var breakSelections = [0,0,0,0]
     
-//    init(chosenExercises: Binding<[ExerciseDB]>) {
-//        self._chosenExercises = chosenExercises
-//    }
+    var test: Int {
+        
+        exerciseSelections[0] * 60
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -69,6 +70,9 @@ struct SetTimesView: View {
                 .padding(.top)
                 if self.showingExerciseTimePicker {
                     TimePickerView(data: self.data, selections: self.$exerciseSelections)
+                        .onReceive([self.exerciseSelections].publisher.first()) { value in
+                            self.setTime(selections: value, rest: false)
+                        }
                 }
                 
                 
@@ -103,6 +107,9 @@ struct SetTimesView: View {
                 }
                 if self.showingBreakTimePicker {
                     TimePickerView(data: self.data, selections: self.$breakSelections)
+                        .onReceive([self.breakSelections].publisher.first()) { value in
+                            self.setTime(selections: value, rest: true)
+                        }
                 }
                 
                 
@@ -126,6 +133,21 @@ struct SetTimesView: View {
         let (brM, brS) = self.breakTime.quotientAndRemainder(dividingBy: 60)
         breakSelections[0] = brM
         breakSelections[2] = brS
+    }
+    
+    func setTime(selections: [Int], rest: Bool) {
+//        for exerciseSet in self.chosenExercises {
+//            if rest {
+//                exerciseSet.restTime = selections[0] * 60 + selections[2]
+//            } else {
+//                exerciseSet.time = selections[0] * 60 + selections[2]
+//            }
+//        }
+        if !rest {
+            self.exerciseTime = exerciseSelections[0] * 60 + exerciseSelections[2]
+        } else {
+            self.breakTime = breakSelections[0] * 60 + breakSelections[2]
+        }
     }
 }
 

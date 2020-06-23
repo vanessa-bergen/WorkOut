@@ -15,6 +15,7 @@ extension Color {
     static let darkestTeal = Color(red: 79.0 / 255.0, green: 146.0 / 255.0, blue: 140.0 / 255.0)
     static let turquiose = Color(red: 47.0 / 255.0, green: 196.0 / 255.0, blue: 178.0 / 255.0)
     static let sunrise = Color(red: 238.0 / 255.0, green: 133.0 / 255.0, blue: 114.0 / 255.0)
+    static let darkSunrise = Color(red: 190.0 / 255.0, green: 106.0 / 255.0, blue: 91.0 / 255.0)
     static let darkBlue = Color(red: 21.0 / 255.0, green: 42.0 / 255.0, blue: 54.0 / 255.0)
 
 }
