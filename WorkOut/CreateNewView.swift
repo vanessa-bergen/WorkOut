@@ -9,22 +9,23 @@
 import SwiftUI
 
 struct CreateNewView<Content: View>: View {
-    let pageCount: Int
+    
     @Binding var currentIndex: Int
     let content: Content
     var title: String {
         switch currentIndex {
         case 0:
-            return "Step 1: Add Exercises"
+            return "Step 1: Name The Workout"
         case 1:
             return "Step 2: Set Default Timers"
+        case 2:
+            return "Step 3: Add Exercises"
         default:
-            return "Step 3: Review Workout"
+            return "Step 4: Review Workout"
         }
     }
 
-    init(pageCount: Int, currentIndex: Binding<Int>, @ViewBuilder content: () -> Content) {
-        self.pageCount = pageCount
+    init(currentIndex: Binding<Int>, @ViewBuilder content: () -> Content) {
         self._currentIndex = currentIndex
         self.content = content()
     }
@@ -41,15 +42,7 @@ struct CreateNewView<Content: View>: View {
                 .offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
                 .offset(x: self.translation)
                 .animation(.interactiveSpring())
-//                .gesture(
-//                    DragGesture().updating(self.$translation) { value, state, _ in
-//                        state = value.translation.width
-//                    }.onEnded { value in
-//                        let offset = value.translation.width / geometry.size.width
-//                        let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
-//                        self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
-//                    }
-//                )
+
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle("\(self.title)", displayMode: .inline)

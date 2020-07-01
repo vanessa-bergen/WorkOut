@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct ContentView: View {
-//    init() {
-//        UITabBar.appearance().barTintColor = UIColor.white
-//    }
-    @Environment(\.managedObjectContext) var moc
-    
+        
     var savedWorkouts = Workouts()
+    
+    @State private var workout: Workout?
     
     @State private var selectedTab = 0
     @State private var currentPage = 0
     
-    // change these to observed objects?
+    
+    @State private var workoutName = ""
+    @State private var description = "Workout Description (Optional)"
     @State private var chosenExercises: [ExerciseSet] = []
     @State private var exerciseTime: Int = 90
     @State private var breakTime: Int = 10
@@ -33,16 +33,8 @@ struct ContentView: View {
                     Text("Workout")
                 }
                 .tag(0)
-            
-            CreateNewView(pageCount: 3, currentIndex: self.$currentPage) {
-                
-                SetTimesView(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseTime, breakTime: self.$breakTime)
-                ExerciseView(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseTime, breakTime: self.$breakTime)
-                EditAndReviewView(currentPage: self.$currentPage, chosenExercises: self.$chosenExercises, exerciseTime: self.$exerciseTime, breakTime: self.$breakTime, selectedTab: self.$selectedTab)
-                
-            }
-            
-                
+
+            CreateStepsView(workout: self.$workout, selectedTab: self.$selectedTab, sheetPresented: .constant(false))
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
                     Text("Create New")
@@ -64,7 +56,6 @@ struct ContentView: View {
 
         }
         .accentColor(.turquiose)
-        .environment(\.managedObjectContext, self.moc)
         .environmentObject(savedWorkouts)
     
     }

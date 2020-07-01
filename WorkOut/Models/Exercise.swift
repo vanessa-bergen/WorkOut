@@ -13,11 +13,12 @@ class Exercise: Codable, Identifiable, Equatable {
         lhs.id == rhs.id
     }
     
-    let id = UUID()
+    let id: UUID
     var name: String
     var description: String
     
     init(name: String, description: String) {
+        self.id = UUID()
         self.name = name
         self.description = description
     }

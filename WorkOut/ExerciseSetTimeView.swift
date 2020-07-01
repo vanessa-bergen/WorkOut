@@ -73,7 +73,7 @@ struct ExerciseSetTimeView: View {
             }){
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Break Time")
+                        Text("Rest Time")
                             .foregroundColor(.black)
                             .font(.headline)
                         Text("\(self.breakSelections[0])")

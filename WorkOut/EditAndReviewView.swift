@@ -9,67 +9,54 @@
 import SwiftUI
 
 struct EditAndReviewView: View {
-    @Environment(\.managedObjectContext) var moc
+    
     @EnvironmentObject var savedWorkouts: Workouts
 
     @Binding var currentPage: Int
+    @Binding var workoutName: String
+    @Binding var description: String
+    @Binding var workout: Workout?
     @Binding var chosenExercises: [ExerciseSet]
     @Binding var exerciseTime: Int
     @Binding var breakTime: Int
     @Binding var selectedTab: Int
-    
-    @State private var newWorkoutName = ""
+    @Binding var sheetPresented: Bool
+
     @State var editMode: Bool = false
     @State var warningMsgShown = false
     @State var showingPopup = false
     @State private var editExercise: ExerciseSet?
     
-    
-    
-    var totalTime: String {
-        if !chosenExercises.isEmpty {
-            let totalExerciseTime = exerciseTime * chosenExercises.count
-            let totalBreakTime = breakTime * (chosenExercises.count - 1)
-            let totalSeconds = totalExerciseTime + totalBreakTime
-            
-            let (hrs, remainder) = totalSeconds.quotientAndRemainder(dividingBy: 3600)
-            let (mins, scds) = remainder.quotientAndRemainder(dividingBy: 60)
-            if hrs > 0 {
-                return "\(hrs) Hrs \(mins) Mins"
-            } else {
-                // rounding up to a minute
-                if scds >= 30 {
-                    return "\(mins + 1) Mins"
-                }
-                return "\(mins) Mins"
-            }
-        } else {
-            return "0"
-        }
+    var totalSeconds: Int {
+        calcTotalSeconds(exerciseSet: self.chosenExercises)
+    }
+    var timeString: String {
+        totalTime(totalSeconds: totalSeconds)
     }
     
-    var saveWorkoutDisabled: Bool {
-        self.newWorkoutName.isEmpty
-    }
     
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 VStack(alignment: .leading) {
                    
-                    TextField("Workout Name", text: self.$newWorkoutName)
-                        .font(.title)
-                        .padding([.leading, .trailing, .top])
-                    Text("Please add a name for the Workout")
-                        .foregroundColor(.red)
-                        .font(.subheadline)
-                        .isHidden(hidden: !self.warningMsgShown, remove: true)
-                        .padding([.leading, .trailing])
-                        
-
-                    Text("Total Time: \(self.totalTime)")
-                        .font(.subheadline)
-                        .padding()
+                    VStack {
+                        Text(self.workoutName)
+                            .font(.title)
+                        Text(self.description)
+                            .font(.headline)
+                            
+                        Text("Total Time: \(self.timeString)")
+                            .font(.headline)
+                            
+                    }
+                    .padding()
+                    .frame(width: geo.size.width * 0.9, alignment: .center)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(Color.darkTeal.opacity(0.5), lineWidth: 2)
+                    )
+                    .padding()
                     
                     HStack {
                         Spacer()
@@ -78,9 +65,11 @@ struct EditAndReviewView: View {
                         }) {
                             if self.editMode {
                                 Text("Done")
+                                    .foregroundColor(.black)
                                     .padding([.top, .leading, .trailing])
                             } else {
                                 Text("Reorder List")
+                                    .foregroundColor(.black)
                                     .padding([.top, .leading, .trailing])
                             }
                         }
@@ -88,28 +77,31 @@ struct EditAndReviewView: View {
                     List {
                         ForEach(self.chosenExercises) { exercise in
                             HStack {
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     HStack {
                                         Text(exercise.exercise.name)
+                                            .foregroundColor(.darkestTeal)
                                             .font(.headline)
                                         Text("\(exercise.time / 60):\(exercise.time % 60)")
-                                            .font(.headline)
-                                            .opacity(0.8)
+                                            .timeStlye(rest: false)
                                     }
                                     HStack {
+                                        
                                         if exercise.restTime > 0 {
                                             Text("Rest")
+                                                .foregroundColor(.darkSunrise)
                                                 .font(.subheadline)
                                             Text("\(exercise.restTime / 60):\(exercise.restTime % 60)")
-                                                .font(.subheadline)
-                                                .opacity(0.8)
+                                                .timeStlye(rest: true)
                                         } else {
                                             Text("No Rest")
+                                                .foregroundColor(.darkSunrise)
+                                                .font(.subheadline)
                                         }
                                     }
                                 }
                                 Spacer()
-                                
+
                                 Button(action: {
                                     self.editExercise = exercise
                                     self.showingPopup = true
@@ -118,12 +110,12 @@ struct EditAndReviewView: View {
                                 }
                                 .padding(.trailing)
                                 Button(action: {
-                                    
+
                                 }) {
                                     Image(systemName: "trash")
                                 }
-                                
-                                
+
+
                             }
                         }
                         .onMove(perform: self.onMove)
@@ -134,13 +126,20 @@ struct EditAndReviewView: View {
                     
                     
                     Button(action: {
-                        let newWorkout = Workout(name: self.newWorkoutName)
-                        newWorkout.exerciseList = self.chosenExercises
-                        self.savedWorkouts.add(newWorkout)
+                        guard let workout = self.workout else {
+                            let newWorkout = Workout(name: self.workoutName, description: self.description)
+                            newWorkout.exerciseList = self.chosenExercises
+                            self.savedWorkouts.add(newWorkout)
+                            
+                            self.reset()
+                            return
+                        }
                         
-                        self.chosenExercises = []
-                        self.currentPage = 0
-                        self.selectedTab = 0
+                        workout.name = self.workoutName
+                        workout.description = self.description
+                        workout.exerciseList = self.chosenExercises
+                        
+                        self.reset()
                         
                     }) {
                         HStack {
@@ -150,12 +149,7 @@ struct EditAndReviewView: View {
                             Spacer()
                         }
                     }
-                    .disabled(self.saveWorkoutDisabled)
-                    .onTapGesture {
-                        if self.saveWorkoutDisabled {
-                            self.warningMsgShown = true
-                        }
-                    }
+                    
                     
                     
                     Spacer()
@@ -194,10 +188,17 @@ struct EditAndReviewView: View {
             item.order = index
         }
     }
+    
+    func reset() {
+        self.workoutName = ""
+        self.description = ""
+        self.chosenExercises = []
+        self.currentPage = 0
+        // going back to the workout tab
+        self.selectedTab = 0
+        // closing the sheet view if this is opened for editing from the workout details view
+        self.sheetPresented = false
+        
+    }
 }
 
-//struct PageView3_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PageView3()
-//    }
-//}

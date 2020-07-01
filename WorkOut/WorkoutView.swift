@@ -9,11 +9,6 @@
 import SwiftUI
 
 struct WorkoutView: View {
-//    @Environment(\.managedObjectContext) var moc
-//    @FetchRequest(
-//        entity: WorkoutDB.entity(),
-//        sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutDB.name, ascending: true)]
-//    ) var workouts: FetchedResults<WorkoutDB>
     
     @EnvironmentObject var workouts: Workouts
     
@@ -55,7 +50,7 @@ struct WorkoutView: View {
                     ScrollView {
                         VStack(spacing: 10) {
                             ForEach(self.workouts.workouts) { workout in
-                                NavigationLink(destination: WorkoutDetailView(workout: .constant(workout))) {
+                                NavigationLink(destination: WorkoutDetailView(workout: .constant(workout), selectedTab: self.$selectedTab)) {
                                     HStack {
                                         VStack(alignment: .leading) {
                                             Text(workout.name)

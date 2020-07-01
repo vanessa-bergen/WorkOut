@@ -9,15 +9,20 @@
 import SwiftUI
 import Combine
 
-class Workout: Codable, Identifiable {
-    let id = UUID()
+class Workout: Codable, Identifiable, Equatable {
+
+    let id: UUID
     var name: String
+    var description = ""
     // number of times to repeat the set
     var repeats: Int = 0
     var exerciseList: [ExerciseSet] = []
+
     
-    init(name: String) {
+    init(name: String, description: String) {
+        self.id = UUID()
         self.name = name
+        self.description = description
     }
     
     var totalSeconds: Int {
@@ -45,6 +50,10 @@ class Workout: Codable, Identifiable {
             }
             return "\(mins) Mins"
         }
+    }
+    
+    static func == (lhs: Workout, rhs: Workout) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

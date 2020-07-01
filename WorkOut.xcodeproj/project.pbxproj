@@ -63,6 +63,10 @@
 		C24A41C2248E701F00B93834 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41C1248E701F00B93834 /* WorkoutView.swift */; };
 		C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */; };
 		C24ED0EA24A2336B00AABFDC /* TimeDisplayModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0E924A2336B00AABFDC /* TimeDisplayModifier.swift */; };
+		C24ED0EC24A2717600AABFDC /* CreateWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0EB24A2717600AABFDC /* CreateWorkoutView.swift */; };
+		C24ED0EE24A2771000AABFDC /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0ED24A2771000AABFDC /* UITextViewWrapper.swift */; };
+		C24ED0F024ABDA0F00AABFDC /* CreateStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */; };
+		C24ED0F224ACBBF300AABFDC /* CalculateTotalTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +128,10 @@
 		C24A41C1248E701F00B93834 /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
 		C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectedCellView.swift; sourceTree = "<group>"; };
 		C24ED0E924A2336B00AABFDC /* TimeDisplayModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDisplayModifier.swift; sourceTree = "<group>"; };
+		C24ED0EB24A2717600AABFDC /* CreateWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutView.swift; sourceTree = "<group>"; };
+		C24ED0ED24A2771000AABFDC /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
+		C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStepsView.swift; sourceTree = "<group>"; };
+		C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateTotalTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,8 +215,10 @@
 				C24A41C1248E701F00B93834 /* WorkoutView.swift */,
 				C2144A7C249279E200AF7EDA /* WorkoutDetailView.swift */,
 				C2144A6C249017DF00AF7EDA /* CreateNewView.swift */,
-				C2144A7024901A8000AF7EDA /* ExerciseView.swift */,
+				C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */,
+				C24ED0EB24A2717600AABFDC /* CreateWorkoutView.swift */,
 				C2144A6A249014B800AF7EDA /* SetTimesView.swift */,
+				C2144A7024901A8000AF7EDA /* ExerciseView.swift */,
 				C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */,
 				C2144A74249118C400AF7EDA /* EditAndReviewView.swift */,
 				C20F404E2499009700355F7C /* EditPopupView.swift */,
@@ -216,6 +226,7 @@
 				C24A41AD248A9F2D00B93834 /* SettingsView.swift */,
 				C20F407A249AC07200355F7C /* ScheduleView.swift */,
 				C20F407C249AC13F00355F7C /* EKEventWrapper.swift */,
+				C24ED0ED24A2771000AABFDC /* UITextViewWrapper.swift */,
 				C24A41AF248AAEA100B93834 /* TimePickerView.swift */,
 				C24A41B1248AD01E00B93834 /* SelectedCellView.swift */,
 				C24A41C5248E7B4400B93834 /* MultiSelectedCellView.swift */,
@@ -224,6 +235,7 @@
 				C24A41B3248AD67800B93834 /* TimerView.swift */,
 				C20F40442495548A00355F7C /* TimerSetup.swift */,
 				C2144A802492D20500AF7EDA /* Player.swift */,
+				C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */,
 				C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */,
 				C24A41BF248E657800B93834 /* CircularProgressBar.swift */,
 				C2144A6824900BF600AF7EDA /* HiddenModifier.swift */,
@@ -346,6 +358,7 @@
 				C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */,
 				C2144A912493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift in Sources */,
 				C20F404F2499009700355F7C /* EditPopupView.swift in Sources */,
+				C24ED0EC24A2717600AABFDC /* CreateWorkoutView.swift in Sources */,
 				C24A41AE248A9F2D00B93834 /* SettingsView.swift in Sources */,
 				C20F40452495548A00355F7C /* TimerSetup.swift in Sources */,
 				C20F407F249ADDC800355F7C /* DropDownView.swift in Sources */,
@@ -355,6 +368,7 @@
 				C20F4051249908B500355F7C /* ExerciseSetTimeView.swift in Sources */,
 				C2144A65248FD99D00AF7EDA /* Color-Extension.swift in Sources */,
 				C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */,
+				C24ED0EE24A2771000AABFDC /* UITextViewWrapper.swift in Sources */,
 				C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */,
 				C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */,
 				C2144A892493B88F00AF7EDA /* ExerciseSet.swift in Sources */,
@@ -362,6 +376,7 @@
 				C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */,
 				C2144A8E2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift in Sources */,
 				C2144A872493B84E00AF7EDA /* Workout.swift in Sources */,
+				C24ED0F224ACBBF300AABFDC /* CalculateTotalTime.swift in Sources */,
 				C24A419E248A9EBD00B93834 /* ContentView.swift in Sources */,
 				C24A41B4248AD67800B93834 /* TimerView.swift in Sources */,
 				C2144A6B249014B800AF7EDA /* SetTimesView.swift in Sources */,
@@ -370,6 +385,7 @@
 				C20F405524995F7500355F7C /* ListWorkoutView.swift in Sources */,
 				C24A4199248A9EBD00B93834 /* SceneDelegate.swift in Sources */,
 				C2144A8F2493BDE100AF7EDA /* ExerciseDB+CoreDataProperties.swift in Sources */,
+				C24ED0F024ABDA0F00AABFDC /* CreateStepsView.swift in Sources */,
 				C2144A7324901E4F00AF7EDA /* RoundCornersModifier.swift in Sources */,
 				C2144A7B24914C1F00AF7EDA /* PrevNavButton.swift in Sources */,
 				C2144A6D249017DF00AF7EDA /* CreateNewView.swift in Sources */,

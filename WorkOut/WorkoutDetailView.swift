@@ -14,75 +14,96 @@ struct WorkoutDetailView: View {
     @EnvironmentObject var savedWorkouts: Workouts
     
     @Binding var workout: Workout
+    @Binding var selectedTab: Int
     
     @State private var showingDeleteAlert = false
+    @State private var navigate = false
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(workout.totalTime)
-                .padding(.leading)
-                .font(.title)
-            List {
-                ForEach(self.workout.exerciseList) { exercise in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(exercise.exercise.name)
-                                    .foregroundColor(.darkestTeal)
-                                    .font(.headline)
-                                Spacer()
-                                Text("\(exercise.time / 60):\(exercise.time % 60)")
-                                    .timeStlye(rest: false)
-                            }
-                            
-                            if exercise.order != self.workout.exerciseList.count-1 {
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                VStack {
+                    Text(self.workout.name)
+                        .font(.title)
+                    Text(self.workout.description)
+                        .font(.headline)
+                    Text(self.workout.totalTime)
+                        .font(.headline)
+                }
+                .padding()
+                .frame(width: geo.size.width * 0.9, alignment: .center)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .strokeBorder(Color.darkTeal.opacity(0.5), lineWidth: 2)
+                )
+                .padding()
+                List {
+                    ForEach(self.workout.exerciseList) { exercise in
+                        HStack {
+                            VStack(alignment: .leading) {
                                 HStack {
-                                    Text("Rest")
-                                        .foregroundColor(.darkSunrise)
-                                        .font(.subheadline)
+                                    Text(exercise.exercise.name)
+                                        .foregroundColor(.darkestTeal)
+                                        .font(.headline)
                                     Spacer()
-                                    if exercise.restTime > 0 {
-                                        Text("\(exercise.restTime / 60):\(exercise.restTime % 60)")
-                                            .timeStlye(rest: true)
-                                    } else {
-                                        Text("No Rest")
-                                            .timeStlye(rest: true)
-                                    }
+                                    Text("\(exercise.time / 60):\(exercise.time % 60)")
+                                        .timeStlye(rest: false)
                                 }
-                                .padding(.top, 10)
+
+                                if exercise.order != self.workout.exerciseList.count-1 {
+                                    HStack {
+                                        Text("Rest")
+                                            .foregroundColor(.darkSunrise)
+                                            .font(.subheadline)
+                                        Spacer()
+                                        if exercise.restTime > 0 {
+                                            Text("\(exercise.restTime / 60):\(exercise.restTime % 60)")
+                                                .timeStlye(rest: true)
+                                        } else {
+                                            Text("No Rest")
+                                                .timeStlye(rest: true)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                }
                             }
                         }
                     }
                 }
-            }
-            HStack {
-                Spacer()
-                NavigationLink(destination: TimerView(workout: workout)) {
-                    
-                    Text("Start Workout")
-                        .buttonStyle()
-                    
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: TimerView(workout: self.workout)) {
+                        
+                        Text("Start Workout")
+                            .buttonStyle()
+                        
+                    }
+                    .padding()
+                    Spacer()
                 }
-                .padding()
-                Spacer()
             }
         }
-        .navigationBarTitle(workout.name)
+
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(trailing:
-            HStack {
+            HStack(spacing: 20) {
                 Button(action: {
+                    self.navigate = true
                     
                 }) {
                     Image(systemName: "square.and.pencil")
+                        .imageScale(.large)
                 }
                 Button(action: {
                     self.showingDeleteAlert = true
                 }) {
                     Image(systemName: "trash")
+                        .imageScale(.large)
                 }
                 
             }
         )
+
         .alert(isPresented: $showingDeleteAlert) {
             Alert(title:
                 Text("Delete Workout"),
@@ -92,6 +113,11 @@ struct WorkoutDetailView: View {
                 },
                 secondaryButton: .cancel())
         }
+        .sheet(isPresented: $navigate) {
+            CreateStepsView(workout: .constant(self.workout), selectedTab: self.$selectedTab, sheetPresented: self.$navigate)
+                .environmentObject(self.savedWorkouts)
+                .accentColor(.turquiose)
+        }
     }
     
     func deleteWorkout() {
@@ -99,9 +125,3 @@ struct WorkoutDetailView: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-//struct WorkoutDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkoutDetailView()
-//    }
-//}

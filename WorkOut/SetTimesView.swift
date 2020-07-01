@@ -18,7 +18,6 @@ struct SetTimesView: View {
         ["Seconds"]
     ]
 
-    @Binding var chosenExercises: [ExerciseSet]
     @Binding var exerciseTime: Int
     @Binding var breakTime: Int
     
@@ -28,10 +27,6 @@ struct SetTimesView: View {
     @State private var exerciseSelections = [0,0,0,0]
     @State private var breakSelections = [0,0,0,0]
     
-    var test: Int {
-        
-        exerciseSelections[0] * 60
-    }
     
     var body: some View {
         GeometryReader { geo in
@@ -118,7 +113,7 @@ struct SetTimesView: View {
                 HStack {
                     PrevNavButton(currentPage: self.$currentPage)
                     Spacer()
-                    NextNavButton(currentPage: self.$currentPage)
+                    NextNavButton(currentPage: self.$currentPage, isDisabled: false)
                 }
             }
         }
@@ -136,13 +131,6 @@ struct SetTimesView: View {
     }
     
     func setTime(selections: [Int], rest: Bool) {
-//        for exerciseSet in self.chosenExercises {
-//            if rest {
-//                exerciseSet.restTime = selections[0] * 60 + selections[2]
-//            } else {
-//                exerciseSet.time = selections[0] * 60 + selections[2]
-//            }
-//        }
         if !rest {
             self.exerciseTime = exerciseSelections[0] * 60 + exerciseSelections[2]
         } else {
