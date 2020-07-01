@@ -10,6 +10,8 @@ import SwiftUI
 
 struct NextNavButton: View {
     @Binding var currentPage: Int
+    var isDisabled: Bool
+    
     var body: some View {
         Button(action: {
             self.currentPage += 1
@@ -26,7 +28,7 @@ struct NextNavButton: View {
             }
         }
         .padding()
-        .background(Color.darkTeal)
+        .background(self.isDisabled ? Color.gray : Color.darkTeal)
         .roundCorners(radius: 20, for: [.topLeft, .bottomLeft])
         .padding(.bottom)
     }
@@ -34,6 +36,6 @@ struct NextNavButton: View {
 
 struct NextNavButton_Previews: PreviewProvider {
     static var previews: some View {
-        NextNavButton(currentPage: .constant(0))
+        NextNavButton(currentPage: .constant(0), isDisabled: false)
     }
 }
