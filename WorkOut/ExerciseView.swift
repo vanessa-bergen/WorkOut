@@ -10,8 +10,9 @@ import SwiftUI
 
 struct ExerciseView: View {
     
-    @ObservedObject var savedExercises = Exercises()
+    //@ObservedObject var savedExercises = Exercises()
     @EnvironmentObject var savedWorkouts: Workouts
+    @EnvironmentObject var savedExercises: Exercises
     
     @Binding var currentPage: Int
     @Binding var workout: Workout?
@@ -41,10 +42,11 @@ struct ExerciseView: View {
                     TextField("Exercise Name", text: self.$newExerciseName)
                     Divider()
                     TextField("Exercise Description (Optional)", text: self.$newExerciseDescription)
+                        
                 }
                 
                 Button(action: {
-                    guard let index = self.savedExercises.exercises.firstIndex(where: { $0.name == self.newExerciseName }) else {
+                    guard let _ = self.savedExercises.exercises.firstIndex(where: { $0.name == self.newExerciseName }) else {
                         let newExercise = Exercise(name: self.newExerciseName, description: self.newExerciseDescription)
                         self.savedExercises.add(newExercise)
                         
@@ -76,6 +78,7 @@ struct ExerciseView: View {
             Text("Select Exercises From List")
                 .bold()
                 .padding([.leading, .trailing, .top])
+            
             
             ScrollView {
                 VStack(spacing: 0) {

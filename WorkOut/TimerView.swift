@@ -12,11 +12,11 @@ import Combine
 // need to add time break for in between rounds
 struct TimerView: View {
     @Environment(\.presentationMode) var presentationMode
+    
     var workout: Workout
     var audioPlayer = Player()
     
     var userData = UserData()
-    
     
     
     // used to track state of total workout
@@ -71,65 +71,77 @@ struct TimerView: View {
         min(self.workoutSeconds / self.totalWorkoutTime * 100, 100)
     }
     
-    //var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
-    //@ObservedObject var timer = TimerSetup()
     @State var timer: Timer.TimerPublisher = Timer.publish (every: 1, on: .main, in: .common)
+    
+    // countdown timer before the workout starts
+    @State private var countdownTime = 5
+    @State var countdownTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var countdownActive: Bool {
+        countdownTime > 0
+    }
     
     var body: some View {
         GeometryReader { geo in
-        VStack {
-          
-            HStack {
-                Text("\(self.percentComplete, specifier: "%.0f")%")
-                ProgressBarView(value: self.$workoutProgress)
+            ZStack {
+                VStack(alignment: .center) {
+                    Text("\(self.countdownTime)")
+                        .font(.system(size: 150, weight: .bold, design: .rounded))
                     
-            }
-            .frame(width: geo.size.width * 0.9, height: 30)
-            .padding(.top)
-            //Text("onrest: \(self.onRest ? "true" : "false"), index: \(self.index) total seconds \(self.totalWorkoutTime)")
-            //Spacer()
-            Text(self.onRest ? "Rest" : self.workout.exerciseList[self.index].exercise.name)
-                .font(.system(.largeTitle, design: .rounded))
-                .bold()
-                .padding(.bottom)
-            
-            CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining, onRest: self.onRest)
-                 //.padding()
-                .frame(width: geo.size.width * 0.6, height: geo.size.width * 0.6)
-            
-            //Spacer()
-            
-            // show whats up next in the last ten seconds
-            
-            
-            
-            Text(self.index != self.workout.exerciseList.count - 1 ? "Up Next: \(self.nextExercise)" : "Up Next: Workout Complete!")
-                .font(.system(.largeTitle, design: .rounded))
-                
-            .isHidden(hidden: self.timeRemaining > 10, remove: false)
-            .padding(.top)
-                
-            
-            
-            
-            
-            //Text("\(self.seconds)")
-            Button(action: {
-                self.isActive.toggle()
-                
-            }){
-                Image(systemName: self.controlButton)
-                    .renderingMode(.original)
-                    .font(.system(size: 60))
-                    .padding(.bottom)
+                    Text(self.workout.exerciseList[self.index].exercise.name)
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                }
+                .isHidden(hidden: !self.countdownActive, remove: true)
+                VStack {
+                  
+                    HStack {
+                        Text("\(self.percentComplete, specifier: "%.0f")%")
+                        ProgressBarView(value: self.$workoutProgress)
+                            
+                    }
+                    .frame(width: geo.size.width * 0.9, height: 30)
+                    .padding(.top)
+
+                    Text(self.onRest ? "Rest" : self.workout.exerciseList[self.index].exercise.name)
+                        .font(.system(.largeTitle, design: .rounded))
+                        .bold()
+                        .padding(.bottom)
                     
+                    CircularProgressBar(value: self.$exerciseProgress, timeRemaining: self.timeRemaining, onRest: self.onRest)
+                         //.padding()
+                        .frame(width: geo.size.width * 0.6, height: geo.size.width * 0.6)
+                    
+                    // show whats up next in the last ten seconds
+                    Text(self.index != self.workout.exerciseList.count - 1 ? "Up Next: \(self.nextExercise)" : "Up Next: All Done!")
+                        .font(.system(.largeTitle, design: .rounded))
+                        
+                    .isHidden(hidden: self.timeRemaining > 10, remove: false)
+                    .padding(.top)
+                        
+
+                    Button(action: {
+                        self.isActive.toggle()
+                        
+                    }){
+                        Image(systemName: self.controlButton)
+                            .renderingMode(.original)
+                            .font(.system(size: 60))
+                            .padding(.bottom)
+                            
+                    }
+                }
+                .blur(radius: self.countdownActive ? 10 : 0)
             }
         }
         
+        .onReceive(self.countdownTimer) { _ in
+            self.countdownTime -= 1
+            if self.countdownTime == 0 {
+                print("countdown complete")
+                self.countdownTimer.upstream.connect().cancel()
+                self.isActive = true
+            }
+            
         }
-        
-        
         
         
         .onReceive(self.timer) { (time) in
@@ -212,9 +224,9 @@ struct TimerView: View {
 
         }
         // triggered when the app moves to the background
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            self.isActive = false
-        }
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+//            self.isActive = false
+//        }
         // triggered when the app enters the foreground
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.isActive = true
@@ -235,14 +247,20 @@ struct TimerView: View {
         // prob need to use on dissapear if we navigate away from the screen, not sure yet
             // need to enable the timer to keep going in the background too
         .onDisappear {
-            //self.timer.cleanup()
+            print("navating away")
+            UIApplication.shared.isIdleTimerDisabled = false
+            self.userData.workout = self.workout
+            self.userData.index = self.index
             self.timer.connect().cancel()
             
         }
         .onAppear {
+            UIApplication.shared.isIdleTimerDisabled = true
             //self.timer.setup()
             self.timer = Timer.publish (every: 1, on: .main, in: .common)
             self.timer.connect()
+            
+            print(" saved workout \(self.userData.workout?.name ?? "nothing saved")")
   
         }
     

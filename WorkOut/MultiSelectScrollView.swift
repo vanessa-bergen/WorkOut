@@ -15,12 +15,13 @@ struct MultiSelectedScrollView: View {
     @Binding var selectedItems: [ExerciseSet]
     @Binding var exerciseTime: Int
     @Binding var breakTime: Int
-    
+    @State private var occurences = 1
     
     var contains: Bool {
         return selectedItems.contains(where: { $0.exercise == item })
     }
     var body: some View {
+        VStack {
         VStack {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
@@ -42,24 +43,49 @@ struct MultiSelectedScrollView: View {
             }
             .padding()
             
-            Divider()
+            
         }
         
-        .background(self.contains ? Color.blue.opacity(0.3) : Color.clear)
+        
 
         // making the whole row tappable
         .contentShape(Rectangle())
         .onTapGesture {
+            self.occurences = 1
             if self.contains {
-
-                if let index = self.selectedItems.firstIndex(where: { $0.exercise == self.item }) {
-                    self.selectedItems.remove(at: index)
-                }
+//                if let index = self.selectedItems.firstIndex(where: { $0.exercise == self.item }) {
+//                    self.selectedItems.remove(at: index)
+//                    self.occurences = 1
+//                }
+                self.selectedItems.removeAll { $0.exercise == self.item }
             } else {
                 let newSet = ExerciseSet(exercise: self.item, time: self.exerciseTime, restTime: self.breakTime, order: self.selectedItems.count)
                 self.selectedItems.append(newSet)
             }
         }
+        
+            if self.contains {
+                Stepper(onIncrement: {
+                    self.occurences += 1
+                    let newSet = ExerciseSet(exercise: self.item, time: self.exerciseTime, restTime: self.breakTime, order: self.selectedItems.count)
+                    self.selectedItems.append(newSet)
+                }, onDecrement: {
+                    if let index = self.selectedItems.firstIndex(where: { $0.exercise == self.item }) {
+                        self.selectedItems.remove(at: index)
+                        self.occurences -= 1
+                    }
+                    
+                }) {
+                    Text("Occurences: \(self.occurences)")
+                        .font(.subheadline)
+                }
+                .padding([.leading, .trailing])
+            }
+        
+            Divider()
+        }
+            
+        .background(self.contains ? Color.blue.opacity(0.3) : Color.clear)
     }
 }
 

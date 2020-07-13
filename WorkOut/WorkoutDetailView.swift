@@ -18,6 +18,8 @@ struct WorkoutDetailView: View {
     
     @State private var showingDeleteAlert = false
     @State private var navigate = false
+    @State private var selectTimerView = 0
+    
     
     var body: some View {
         GeometryReader { geo in
@@ -73,10 +75,10 @@ struct WorkoutDetailView: View {
                 HStack {
                     Spacer()
                     NavigationLink(destination: TimerView(workout: self.workout)) {
-                        
+
                         Text("Start Workout")
                             .buttonStyle()
-                        
+
                     }
                     .padding()
                     Spacer()

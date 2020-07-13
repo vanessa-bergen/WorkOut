@@ -9,7 +9,11 @@
 import SwiftUI
 
 class Exercises: ObservableObject {
-    @Published private(set) var exercises: [Exercise]
+    @Published var exercises: [Exercise] {
+        didSet {
+            self.save()
+        }
+    }
     
     static let exercisesKey = "SavedExercises"
     
@@ -53,5 +57,9 @@ class Exercises: ObservableObject {
     func add(_ exercise: Exercise) {
         exercises.append(exercise)
         save()
+    }
+    
+    func delete(at offsets: IndexSet) {
+        exercises.remove(atOffsets: offsets)
     }
 }

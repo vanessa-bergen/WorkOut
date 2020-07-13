@@ -67,6 +67,7 @@
 		C24ED0EE24A2771000AABFDC /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0ED24A2771000AABFDC /* UITextViewWrapper.swift */; };
 		C24ED0F024ABDA0F00AABFDC /* CreateStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */; };
 		C24ED0F224ACBBF300AABFDC /* CalculateTotalTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */; };
+		C24ED0F424AE367000AABFDC /* ListExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F324AE367000AABFDC /* ListExerciseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +133,7 @@
 		C24ED0ED24A2771000AABFDC /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStepsView.swift; sourceTree = "<group>"; };
 		C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateTotalTime.swift; sourceTree = "<group>"; };
+		C24ED0F324AE367000AABFDC /* ListExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				C2144A74249118C400AF7EDA /* EditAndReviewView.swift */,
 				C20F404E2499009700355F7C /* EditPopupView.swift */,
 				C20F405424995F7500355F7C /* ListWorkoutView.swift */,
+				C24ED0F324AE367000AABFDC /* ListExerciseView.swift */,
 				C24A41AD248A9F2D00B93834 /* SettingsView.swift */,
 				C20F407A249AC07200355F7C /* ScheduleView.swift */,
 				C20F407C249AC13F00355F7C /* EKEventWrapper.swift */,
@@ -358,6 +361,7 @@
 				C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */,
 				C2144A912493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift in Sources */,
 				C20F404F2499009700355F7C /* EditPopupView.swift in Sources */,
+				C24ED0F424AE367000AABFDC /* ListExerciseView.swift in Sources */,
 				C24ED0EC24A2717600AABFDC /* CreateWorkoutView.swift in Sources */,
 				C24A41AE248A9F2D00B93834 /* SettingsView.swift in Sources */,
 				C20F40452495548A00355F7C /* TimerSetup.swift in Sources */,
