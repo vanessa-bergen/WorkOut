@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
         
     var savedWorkouts = Workouts()
+    var savedExercises = Exercises()
     
     @State private var workout: Workout?
     
@@ -30,10 +31,16 @@ struct ContentView: View {
                 .tabItem {
                     Image("weights")
                         .renderingMode(.template)
-                    Text("Workout")
+                    Text("Workouts")
                 }
                 .tag(0)
-
+            ListExerciseView()
+                .tabItem {
+                    Image("exercise")
+                        .renderingMode(.template)
+                    Text("Exercises")
+                }
+                .tag(4)
             CreateStepsView(workout: self.$workout, selectedTab: self.$selectedTab, sheetPresented: .constant(false))
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
@@ -57,6 +64,7 @@ struct ContentView: View {
         }
         .accentColor(.turquiose)
         .environmentObject(savedWorkouts)
+        .environmentObject(savedExercises)
     
     }
 }
