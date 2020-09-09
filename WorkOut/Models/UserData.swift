@@ -15,6 +15,8 @@ class UserData: ObservableObject {
     static let soundEnabledKey = "SoundEnabled"
     static let soundKey = "Sound"
     static let vibrationEnabledKey = "VibrationEnabled"
+    static let workoutKey = "Workout"
+    static let indexKey = "Index"
 
     public var sounds = ["Beep", "Bell", "Ding", "Electronic", "Pew", "Ping", "Tone"]
     
@@ -49,6 +51,21 @@ class UserData: ObservableObject {
         }
     }
     
+    @Published var workout: Workout? {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(self.workout) {
+                UserDefaults.standard.set(encoded, forKey: Self.workoutKey)
+            }
+            //UserDefaults.standard.set(self.workout, forKey: Self.workoutKey)
+        }
+    }
+    
+    @Published var index: Int? {
+        didSet {
+            UserDefaults.standard.set(self.index, forKey: Self.indexKey)
+        }
+    }
+    
     
     
     
@@ -63,6 +80,17 @@ class UserData: ObservableObject {
         self.voice = UserDefaults.standard.string(forKey: Self.voiceKey) ?? "Canadian"
         self.sound = UserDefaults.standard.string(forKey: Self.soundKey) ?? "Beep"
         self.vibrationEnabled = UserDefaults.standard.bool(forKey: Self.vibrationEnabledKey)
+        
+        if let data = UserDefaults.standard.data(forKey: Self.workoutKey) {
+            if let decoded = try? JSONDecoder().decode(Workout?.self, from: data) {
+                self.workout = decoded
+                return
+            }
+        } else {
+            self.workout = nil
+        }
+        
+        self.index = UserDefaults.standard.integer(forKey: Self.indexKey)
         
     }
     

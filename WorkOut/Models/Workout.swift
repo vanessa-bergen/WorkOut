@@ -11,19 +11,45 @@ import Combine
 
 class Workout: Codable, Identifiable, Equatable {
 
-    let id: UUID
+    var _id: String
     var name: String
     var description = ""
-    // number of times to repeat the set
-    var repeats: Int = 0
     var exerciseList: [ExerciseSet] = []
+    
+    enum CodingKeys: CodingKey {
+        case _id, name, description, exerciseList
+    }
 
     
-    init(name: String, description: String) {
-        self.id = UUID()
+    init(name: String, description: String, exerciseList: [ExerciseSet]) {
+        self._id = UUID().uuidString
         self.name = name
         self.description = description
+        self.exerciseList = exerciseList
     }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(_id, forKey: ._id)
+        try container.encode(name, forKey: .name)
+        try container.encode(description, forKey: .description)
+        //try container.encode(exerciseList.map { $0._id }, forKey: .exerciseList)
+        try container.encode(exerciseList, forKey: .exerciseList)
+        
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        _id = try container.decode(String.self, forKey: ._id)
+        exerciseList = try container.decode([ExerciseSet].self, forKey: .exerciseList)
+        name = try container.decode(String.self, forKey: .name)
+        description = try container.decode(String.self, forKey: .description)
+
+    }
+    
     
     var totalSeconds: Int {
         var totalSeconds = 0
@@ -53,48 +79,6 @@ class Workout: Codable, Identifiable, Equatable {
     }
     
     static func == (lhs: Workout, rhs: Workout) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-class Workouts: ObservableObject {
-    @Published private(set) var workouts: [Workout]
-    
-    static let workoutsKey = "SavedWorkouts"
-        
-        init() {
-            
-            let filename = FileManager.documentsDirectoryURL
-                .appendingPathComponent(Self.workoutsKey)
-            do {
-                let data = try Data(contentsOf: filename)
-                self.workouts = try JSONDecoder().decode([Workout].self, from: data)
-            } catch {
-                self.workouts = []
-            }
-        }
-        
-        func save() {
-            objectWillChange.send()
-            do {
-                let filename = FileManager.documentsDirectoryURL
-                    .appendingPathComponent(Self.workoutsKey)
-                let data = try JSONEncoder().encode(workouts)
-                    try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
-            } catch {
-                 print("Unable to save data.")
-            }
-        }
-        
-        func add(_ workout: Workout) {
-            workouts.append(workout)
-            save()
-        }
-    
-    func delete(_ workout: Workout) {
-        if let index = self.workouts.firstIndex(where: { $0.id == workout.id }) {
-            workouts.remove(at: index)
-        }
-        save()
+        lhs._id == rhs._id
     }
 }

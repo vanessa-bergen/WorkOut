@@ -38,15 +38,12 @@
 		C2144A7F2492D16500AF7EDA /* Ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C2144A7E2492D16500AF7EDA /* Ding.mp3 */; };
 		C2144A812492D20500AF7EDA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A802492D20500AF7EDA /* Player.swift */; };
 		C2144A832492DBA400AF7EDA /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A822492DBA400AF7EDA /* Exercise.swift */; };
-		C2144A852492DE2700AF7EDA /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = C2144A842492DE2700AF7EDA /* exercises.json */; };
 		C2144A872493B84E00AF7EDA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A862493B84E00AF7EDA /* Workout.swift */; };
 		C2144A892493B88F00AF7EDA /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A882493B88F00AF7EDA /* ExerciseSet.swift */; };
 		C2144A8E2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A8A2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift */; };
 		C2144A8F2493BDE100AF7EDA /* ExerciseDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A8B2493BDE100AF7EDA /* ExerciseDB+CoreDataProperties.swift */; };
 		C2144A902493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A8C2493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift */; };
 		C2144A912493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2144A8D2493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift */; };
-		C2144A932493CB2400AF7EDA /* workout.json in Resources */ = {isa = PBXBuildFile; fileRef = C2144A922493CB2400AF7EDA /* workout.json */; };
-		C2144A952493CBA600AF7EDA /* exerciseSet.json in Resources */ = {isa = PBXBuildFile; fileRef = C2144A942493CBA600AF7EDA /* exerciseSet.json */; };
 		C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A4196248A9EBC00B93834 /* AppDelegate.swift */; };
 		C24A4199248A9EBD00B93834 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24A4198248A9EBD00B93834 /* SceneDelegate.swift */; };
 		C24A419C248A9EBD00B93834 /* WorkOut.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24A419A248A9EBD00B93834 /* WorkOut.xcdatamodeld */; };
@@ -68,6 +65,10 @@
 		C24ED0F024ABDA0F00AABFDC /* CreateStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */; };
 		C24ED0F224ACBBF300AABFDC /* CalculateTotalTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */; };
 		C24ED0F424AE367000AABFDC /* ListExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F324AE367000AABFDC /* ListExerciseView.swift */; };
+		C26BB52725030CE600AE5F35 /* EditExercisePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26BB52625030CE600AE5F35 /* EditExercisePopup.swift */; };
+		C26BB529250801A600AE5F35 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26BB528250801A600AE5F35 /* APIClient.swift */; };
+		C2F4AD9D24F8311400BD439D /* CreateNewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F4AD9C24F8311300BD439D /* CreateNewExerciseView.swift */; };
+		C2F4AD9F24F97FFF00BD439D /* Workouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F4AD9E24F97FFF00BD439D /* Workouts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,15 +103,12 @@
 		C2144A7E2492D16500AF7EDA /* Ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ding.mp3; sourceTree = "<group>"; };
 		C2144A802492D20500AF7EDA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		C2144A822492DBA400AF7EDA /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		C2144A842492DE2700AF7EDA /* exercises.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		C2144A862493B84E00AF7EDA /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		C2144A882493B88F00AF7EDA /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		C2144A8A2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseDB+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C2144A8B2493BDE100AF7EDA /* ExerciseDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C2144A8C2493BDE100AF7EDA /* WorkoutDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutDB+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C2144A8D2493BDE100AF7EDA /* WorkoutDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C2144A922493CB2400AF7EDA /* workout.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workout.json; sourceTree = "<group>"; };
-		C2144A942493CBA600AF7EDA /* exerciseSet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exerciseSet.json; sourceTree = "<group>"; };
 		C24A4193248A9EBC00B93834 /* WorkOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C24A4196248A9EBC00B93834 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C24A4198248A9EBD00B93834 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +132,10 @@
 		C24ED0EF24ABDA0F00AABFDC /* CreateStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStepsView.swift; sourceTree = "<group>"; };
 		C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateTotalTime.swift; sourceTree = "<group>"; };
 		C24ED0F324AE367000AABFDC /* ListExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExerciseView.swift; sourceTree = "<group>"; };
+		C26BB52625030CE600AE5F35 /* EditExercisePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisePopup.swift; sourceTree = "<group>"; };
+		C26BB528250801A600AE5F35 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		C2F4AD9C24F8311300BD439D /* CreateNewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewExerciseView.swift; sourceTree = "<group>"; };
+		C2F4AD9E24F97FFF00BD439D /* Workouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workouts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				C2144A822492DBA400AF7EDA /* Exercise.swift */,
 				C20F40462496B36400355F7C /* Exercises.swift */,
 				C2144A862493B84E00AF7EDA /* Workout.swift */,
+				C2F4AD9E24F97FFF00BD439D /* Workouts.swift */,
 				C2144A882493B88F00AF7EDA /* ExerciseSet.swift */,
 				C20F40422494081400355F7C /* UserData.swift */,
 			);
@@ -208,12 +211,10 @@
 				C20F403D2493FD3900355F7C /* Models */,
 				C20F403F2494001700355F7C /* Sounds */,
 				C20F403C2493FD2A00355F7C /* Extensions */,
-				C2144A842492DE2700AF7EDA /* exercises.json */,
-				C2144A922493CB2400AF7EDA /* workout.json */,
-				C2144A942493CBA600AF7EDA /* exerciseSet.json */,
 				C24A4196248A9EBC00B93834 /* AppDelegate.swift */,
 				C24A4198248A9EBD00B93834 /* SceneDelegate.swift */,
 				C24A419D248A9EBD00B93834 /* ContentView.swift */,
+				C26BB528250801A600AE5F35 /* APIClient.swift */,
 				C24A41C1248E701F00B93834 /* WorkoutView.swift */,
 				C2144A7C249279E200AF7EDA /* WorkoutDetailView.swift */,
 				C2144A6C249017DF00AF7EDA /* CreateNewView.swift */,
@@ -221,11 +222,13 @@
 				C24ED0EB24A2717600AABFDC /* CreateWorkoutView.swift */,
 				C2144A6A249014B800AF7EDA /* SetTimesView.swift */,
 				C2144A7024901A8000AF7EDA /* ExerciseView.swift */,
+				C2F4AD9C24F8311300BD439D /* CreateNewExerciseView.swift */,
 				C20F4050249908B500355F7C /* ExerciseSetTimeView.swift */,
 				C2144A74249118C400AF7EDA /* EditAndReviewView.swift */,
 				C20F404E2499009700355F7C /* EditPopupView.swift */,
 				C20F405424995F7500355F7C /* ListWorkoutView.swift */,
 				C24ED0F324AE367000AABFDC /* ListExerciseView.swift */,
+				C26BB52625030CE600AE5F35 /* EditExercisePopup.swift */,
 				C24A41AD248A9F2D00B93834 /* SettingsView.swift */,
 				C20F407A249AC07200355F7C /* ScheduleView.swift */,
 				C20F407C249AC13F00355F7C /* EKEventWrapper.swift */,
@@ -241,12 +244,12 @@
 				C24ED0F124ACBBF300AABFDC /* CalculateTotalTime.swift */,
 				C24A41B5248AD6DF00B93834 /* ProgressBarView.swift */,
 				C24A41BF248E657800B93834 /* CircularProgressBar.swift */,
+				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
+				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
 				C2144A6824900BF600AF7EDA /* HiddenModifier.swift */,
 				C20F4052249922C900355F7C /* ButtonModifier.swift */,
 				C24ED0E924A2336B00AABFDC /* TimeDisplayModifier.swift */,
 				C2144A7224901E4F00AF7EDA /* RoundCornersModifier.swift */,
-				C2144A7824914B2D00AF7EDA /* NextNavButton.swift */,
-				C2144A7A24914C1F00AF7EDA /* PrevNavButton.swift */,
 				C24A419F248A9EBF00B93834 /* Assets.xcassets */,
 				C24A41A4248A9EBF00B93834 /* LaunchScreen.storyboard */,
 				C24A41A7248A9EBF00B93834 /* Info.plist */,
@@ -323,17 +326,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C20F4087249D2B0300355F7C /* Electronic.mp3 in Resources */,
-				C2144A852492DE2700AF7EDA /* exercises.json in Resources */,
 				C2144A7F2492D16500AF7EDA /* Ding.mp3 in Resources */,
 				C20F4083249D283C00355F7C /* Bell.mp3 in Resources */,
 				C20F4057249A3F3500355F7C /* Tone.mp3 in Resources */,
 				C20F4085249D2A3A00355F7C /* Ping.mp3 in Resources */,
 				C24A41A6248A9EBF00B93834 /* LaunchScreen.storyboard in Resources */,
-				C2144A932493CB2400AF7EDA /* workout.json in Resources */,
 				C20F4081249D184E00355F7C /* Pew.mp3 in Resources */,
 				C24A41A3248A9EBF00B93834 /* Preview Assets.xcassets in Resources */,
 				C20F40412494003500355F7C /* Beep.mp3 in Resources */,
-				C2144A952493CBA600AF7EDA /* exerciseSet.json in Resources */,
 				C24A41A0248A9EBF00B93834 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +356,7 @@
 				C24ED0EA24A2336B00AABFDC /* TimeDisplayModifier.swift in Sources */,
 				C20F4053249922C900355F7C /* ButtonModifier.swift in Sources */,
 				C2144A7124901A8000AF7EDA /* ExerciseView.swift in Sources */,
+				C2F4AD9F24F97FFF00BD439D /* Workouts.swift in Sources */,
 				C2144A832492DBA400AF7EDA /* Exercise.swift in Sources */,
 				C2144A7D249279E200AF7EDA /* WorkoutDetailView.swift in Sources */,
 				C24A41B6248AD6DF00B93834 /* ProgressBarView.swift in Sources */,
@@ -374,11 +375,14 @@
 				C20F40492496B44500355F7C /* FileManger-Extension.swift in Sources */,
 				C24ED0EE24A2771000AABFDC /* UITextViewWrapper.swift in Sources */,
 				C24A41C6248E7B4400B93834 /* MultiSelectedCellView.swift in Sources */,
+				C26BB529250801A600AE5F35 /* APIClient.swift in Sources */,
 				C24A4197248A9EBC00B93834 /* AppDelegate.swift in Sources */,
+				C2F4AD9D24F8311400BD439D /* CreateNewExerciseView.swift in Sources */,
 				C2144A892493B88F00AF7EDA /* ExerciseSet.swift in Sources */,
 				C2144A77249138EB00AF7EDA /* MultiSelectScrollView.swift in Sources */,
 				C2144A6924900BF600AF7EDA /* HiddenModifier.swift in Sources */,
 				C2144A8E2493BDE100AF7EDA /* ExerciseDB+CoreDataClass.swift in Sources */,
+				C26BB52725030CE600AE5F35 /* EditExercisePopup.swift in Sources */,
 				C2144A872493B84E00AF7EDA /* Workout.swift in Sources */,
 				C24ED0F224ACBBF300AABFDC /* CalculateTotalTime.swift in Sources */,
 				C24A419E248A9EBD00B93834 /* ContentView.swift in Sources */,
