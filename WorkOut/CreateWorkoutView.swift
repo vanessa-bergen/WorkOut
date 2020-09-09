@@ -44,10 +44,8 @@ struct CreateWorkoutView: View {
     }
     
     var body: some View {
-        NavigationView {
         GeometryReader { geo in
             VStack {
-                
                 TextField("Workout Name", text: self.$workoutName)
                     .multilineTextAlignment(.center)
                     .font(.title)
@@ -64,14 +62,13 @@ struct CreateWorkoutView: View {
                     .font(.subheadline)
                     .isHidden(hidden: !self.warningMsgShown, remove: true)
                     .padding([.leading, .trailing])
+                
                 UITextViewWrapper(text: self.$description)
                     .frame(width: geo.size.width * 0.9, height: geo.size.height * 0.4, alignment: .center)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .strokeBorder(Color.darkTeal.opacity(0.5), lineWidth: 2)
                     )
-                    
-                
                     
                 Spacer()
 
@@ -93,10 +90,8 @@ struct CreateWorkoutView: View {
                     self.workoutName = workout.name
                     self.description = workout.description
                 }
-            
-        }
+
+            }
         }
     }
-}
-
 }

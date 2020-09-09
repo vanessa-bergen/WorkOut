@@ -13,7 +13,6 @@ struct CreateNewExerciseView: View {
     
     @Binding var newExerciseName: String
     @Binding var newExerciseDescription: String
-    @Binding var exerciseExistsAlert: Bool
     
     // used to force the textfield placeholders to show after textfields have been cleared
     @State private var refresh = false

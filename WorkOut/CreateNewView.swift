@@ -46,10 +46,7 @@ struct CreateNewView<Content: View>: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle("\(self.title)", displayMode: .inline)
-        
-            
         }
-        
     }
 }
 

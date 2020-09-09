@@ -22,7 +22,7 @@ struct TimeDisplay: ViewModifier {
 }
 
 extension View {
-    func timeStlye(rest: Bool) -> some View {
+    func timeStyle(rest: Bool) -> some View {
         self.modifier(TimeDisplay(rest: rest))
     }
 }

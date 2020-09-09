@@ -35,7 +35,7 @@ struct SelectedCellView: View {
             if self.alert {
                 self.audioPlayer.playSound(soundEnabled: true, sound: self.selectedItem, vibrationEnabled: false)
             } else {
-                self.audioPlayer.playVoice(word: "Hello, what a great time to workout!", accent: self.accents[self.item]!)
+                self.audioPlayer.playVoice(word: "Time to workout!", accent: self.accents[self.item]!)
             }
             
         }

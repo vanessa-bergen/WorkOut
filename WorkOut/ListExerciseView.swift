@@ -14,7 +14,6 @@ struct ListExerciseView: View {
     @State private var editMode: EditMode = .inactive
     @State private var newExerciseName = ""
     @State private var newExerciseDescription = ""
-    @State private var exerciseExistsAlert = false
     @State private var exerciseToEdit: Exercise?
     @State private var showingPopup = false
     @State private var deleteWarning = false
@@ -27,7 +26,7 @@ struct ListExerciseView: View {
             GeometryReader { geo in
                 ZStack {
                     VStack(alignment: .leading) {
-                        CreateNewExerciseView(newExerciseName: self.$newExerciseName, newExerciseDescription: self.$newExerciseDescription, exerciseExistsAlert: self.$exerciseExistsAlert)
+                        CreateNewExerciseView(newExerciseName: self.$newExerciseName, newExerciseDescription: self.$newExerciseDescription)
                         
                         Text("Exercises")
                             .bold()

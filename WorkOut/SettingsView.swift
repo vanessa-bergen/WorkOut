@@ -11,12 +11,15 @@ import AVFoundation
 
 struct SettingsView: View {
     @ObservedObject var userData = UserData()
+    @ObservedObject var savedExercises = Exercises()
+    
 
     var body: some View {
         NavigationView {
             Form {
                 
                 Section(header: Text("Voice Upcoming Exercises")) {
+                    
                     Toggle(isOn: $userData.voiceEnabled) {
                         Text("Voice Enabled")
                     }
