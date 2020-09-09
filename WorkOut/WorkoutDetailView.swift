@@ -12,6 +12,7 @@ struct WorkoutDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var savedWorkouts: Workouts
+    @EnvironmentObject var savedExercises: Exercises
     
     @Binding var workout: Workout
     @Binding var selectedTab: Int
@@ -20,6 +21,7 @@ struct WorkoutDetailView: View {
     @State private var navigate = false
     @State private var selectTimerView = 0
     
+    var apiClient = APIClient()
     
     var body: some View {
         GeometryReader { geo in
@@ -49,7 +51,7 @@ struct WorkoutDetailView: View {
                                         .font(.headline)
                                     Spacer()
                                     Text("\(exercise.time / 60):\(exercise.time % 60)")
-                                        .timeStlye(rest: false)
+                                        .timeStyle(rest: false)
                                 }
 
                                 if exercise.order != self.workout.exerciseList.count-1 {
@@ -60,10 +62,10 @@ struct WorkoutDetailView: View {
                                         Spacer()
                                         if exercise.restTime > 0 {
                                             Text("\(exercise.restTime / 60):\(exercise.restTime % 60)")
-                                                .timeStlye(rest: true)
+                                                .timeStyle(rest: true)
                                         } else {
                                             Text("No Rest")
-                                                .timeStlye(rest: true)
+                                                .timeStyle(rest: true)
                                         }
                                     }
                                     .padding(.top, 10)
@@ -102,14 +104,13 @@ struct WorkoutDetailView: View {
                     Image(systemName: "trash")
                         .imageScale(.large)
                 }
-                
             }
         )
 
         .alert(isPresented: $showingDeleteAlert) {
             Alert(title:
-                Text("Delete Workout"),
-                message: Text("Are you sure?"),
+                Text("Warning!"),
+                message: Text("Are you sure you want to delete?"),
                 primaryButton: .destructive(Text("Delete")) {
                     self.deleteWorkout()
                 },
@@ -118,12 +119,35 @@ struct WorkoutDetailView: View {
         .sheet(isPresented: $navigate) {
             CreateStepsView(workout: .constant(self.workout), selectedTab: self.$selectedTab, sheetPresented: self.$navigate)
                 .environmentObject(self.savedWorkouts)
+                .environmentObject(self.savedExercises)
                 .accentColor(.turquiose)
         }
     }
     
     func deleteWorkout() {
-        self.savedWorkouts.delete(workout)
+        self.apiClient.sendData(Workout.self, for: self.workout, method: .delete) { (result) in
+            switch result {
+            case .success((let data, let response)):
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                    print("no status code")
+                    return
+                }
+                if statusCode == 200 {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                        print("json return for deleted workout \(json)")
+                    } catch {
+                        print("json serialization failed \(error)")
+                    }
+                    
+                    self.savedWorkouts.delete(self.workout)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
         presentationMode.wrappedValue.dismiss()
     }
 }

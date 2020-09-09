@@ -15,9 +15,21 @@ struct CreateNewExerciseView: View {
     @Binding var newExerciseDescription: String
     @Binding var exerciseExistsAlert: Bool
     
+    // used to force the textfield placeholders to show after textfields have been cleared
+    @State private var refresh = false
+    
+    var apiClient = APIClient()
+    
     var addExerciseDisabled: Bool {
         // if the newExerciseName textfield is empty we want the add button to be disabled
-        self.newExerciseName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        if self.newExerciseName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return true
+        }
+        // check to see if an exercise exists with the same name
+        guard let _ = self.savedExercises.exercises.firstIndex(where: { $0.name == self.newExerciseName }) else {
+            return false
+        }
+        return true
     }
     
     
@@ -30,25 +42,50 @@ struct CreateNewExerciseView: View {
             Divider()
             HStack {
                 VStack {
-                    TextField("Exercise Name", text: self.$newExerciseName)
+                    TextField("Exercise Name" + (refresh ? "" : " "), text: self.$newExerciseName)
                     Divider()
-                    TextField("Exercise Description (Optional)", text: self.$newExerciseDescription)
+                    TextField("Exercise Description (Optional)" + (refresh ? "" : " "), text: self.$newExerciseDescription)
                         
                 }
                 
                 Button(action: {
-                    //guard let _ = self.savedExercises.exercises.firstIndex(where: { $0.name == self.newExerciseName }) else {
-//                        let newExercise = Exercise(name: self.newExerciseName, description: self.newExerciseDescription)
-//                        self.savedExercises.add(newExercise)
-                        
-                        self.createExercise()
-                        
-                        // reset the text field
-                        self.newExerciseName = ""
-                        self.newExerciseDescription = ""
-                        return
-//                    }
-//                    self.exerciseExistsAlert = true
+                    let newExercise = Exercise(name: self.newExerciseName, description: self.newExerciseDescription)
+                    self.apiClient.sendData(Exercise.self, for: newExercise, method: .post) { (result) in
+                        switch result {
+                        case .success((let data, let response)):
+                            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                                print("no status code")
+                                return
+                            }
+                            if statusCode == 201 {
+                                do {
+                                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                                    print("json return \(json)")
+                                } catch {
+                                    print(error)
+                                }
+                                
+                                do {
+                                    let decodedExercise = try JSONDecoder().decode(Exercise.self, from: data)
+                                    print("created exercise \(decodedExercise._id) \(decodedExercise.name)")
+                                    self.savedExercises.add(decodedExercise)
+                                
+                                } catch {
+                                    print("Error: \(error)")
+                                }
+                            }
+                            
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                    
+                    // reset the text field
+                    self.newExerciseDescription = ""
+                    self.newExerciseName = ""
+                    self.refresh.toggle()
+                    
+                    return
                     
                 }) {
                     if addExerciseDisabled {
@@ -68,50 +105,6 @@ struct CreateNewExerciseView: View {
             .padding([.leading, .trailing])
             Divider()
         }
-    }
-    
-    func createExercise() {
-        let newExercise = Exercise(name: self.newExerciseName, description: self.newExerciseDescription)
-        
-        guard let encoded = try? JSONEncoder().encode(newExercise) else {
-            print("Failed to encode exercise")
-            return
-        }
-        
-        let url = URL(string: "http://165.232.56.142:3004/exercise")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = encoded
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("No data in response: \(error?.localizedDescription ?? "Unknown error").")
-                return
-            }
-            
-            // if we get a success response, append the exercise to the exercises list, that way we won't need to make another call to the server since we know it worked
-            print(response ?? "no response")
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            print(statusCode ?? "no status")
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
-                print("json return \(json)")
-            } catch {
-                print(error)
-            }
-            
-            do {
-                let decodedExercise = try JSONDecoder().decode(Exercise.self, from: data)
-                print("it worked for exercise \(decodedExercise.name) \(decodedExercise.description)")
-                self.savedExercises.add(decodedExercise)
-            
-            } catch {
-                print("Error: \(error)")
-            }
-
-        }.resume()
     }
 }
 

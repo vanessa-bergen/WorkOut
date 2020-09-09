@@ -25,7 +25,7 @@ class Workouts: ObservableObject {
     static let workoutsKey = "SavedWorkouts"
         
         init() {
-            apiClient.fetch(Workout.self) { (result) in
+            apiClient.fetchData(Workout.self) { (result) in
                 switch result {
                 case .success(let workouts):
                     print(workouts.map { $0.name })
@@ -56,15 +56,14 @@ class Workouts: ObservableObject {
                 self.workouts.append(workout)
                 self.workouts.sort { $0.name < $1.name }
             }
-            
-            //save()
         }
     
     func delete(_ workout: Workout) {
-        if let index = self.workouts.firstIndex(where: { $0.id == workout.id }) {
-            workouts.remove(at: index)
+        DispatchQueue.main.async {
+            if let index = self.workouts.firstIndex(where: { $0.id == workout.id }) {
+                self.workouts.remove(at: index)
+            }
         }
-        save()
     }
 }
 

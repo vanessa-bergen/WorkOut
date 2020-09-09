@@ -60,6 +60,7 @@ struct MultiSelectedScrollView: View {
                 self.selectedItems.removeAll { $0.exercise == self.item }
             } else {
                 let newSet = ExerciseSet(exercise: self.item, time: self.exerciseTime, restTime: self.breakTime, order: self.selectedItems.count)
+                
                 self.selectedItems.append(newSet)
             }
         }
@@ -87,5 +88,6 @@ struct MultiSelectedScrollView: View {
             
         .background(self.contains ? Color.blue.opacity(0.3) : Color.clear)
     }
+    
 }
 

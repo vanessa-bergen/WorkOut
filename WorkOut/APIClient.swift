@@ -9,12 +9,18 @@
 import Foundation
 import Combine
 
+enum HttpMethod: String {
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
 class APIClient {
     
     let baseURL = URL(string: "http://165.232.56.142:3004")!
     let session = URLSession.shared
     
-    func fetch<T: Fetchable>(_ model: T.Type, completion: @escaping (Result<[T], Error>) -> Void) {
+    func fetchData<T: Fetchable>(_ model: T.Type, completion: @escaping (Result<[T], Error>) -> Void) {
         
         // Construct the URLRequest
         // since the model conforms to Fetchable, it has to have the variable apiBase
@@ -34,17 +40,29 @@ class APIClient {
         task.resume()
     }
     
-    func create<T: Fetchable>(for object: T, completion: @escaping (Result<(Data, URLResponse), Error>) -> Void) {
+    func sendData<T: Fetchable>(_ model: T.Type, for object: T, method httpMethod: HttpMethod, completion: @escaping (Result<(Data, URLResponse), Error>) -> Void) {
     
         guard let encoded = try? JSONEncoder().encode(object) else {
             print("Failed to encode object")
             return
         }
         
-        let url = URL(string: "http://165.232.56.142:3004/workout")!
+        let urlPath = { () -> String in
+            switch httpMethod {
+            case .post:
+                return model.apiBase
+            case .put:
+                return model.apiBase + "/edit"
+            default:
+                return model.apiBase + "/delete"
+            }
+        }()
+        
+        let url = baseURL
+            .appendingPathComponent(urlPath)
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod.rawValue
         request.httpBody = encoded
         
         URLSession.shared.dataTask(with: request) { data, response, error in

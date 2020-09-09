@@ -22,51 +22,7 @@ class Exercises: ObservableObject {
     var apiClient = APIClient()
     
     init() {
-//        guard let url = Bundle.main.url(forResource: "exercises", withExtension: "json") else {
-//            fatalError("Failed to locate file in bundle.")
-//        }
-//        guard let data = try? Data(contentsOf: url) else {
-//            fatalError("Failed to load file from bundle.")
-//        }
-//        let decoder = JSONDecoder()
-//        guard let loaded = try? decoder.decode([Exercise].self, from: data) else {
-//            self.exercises = []
-//            fatalError("Failed to decode file from bundle.")
-//
-//        }
-//
-//        self.exercises = loaded
-        
-//        let filename = FileManager.documentsDirectoryURL
-//            .appendingPathComponent(Self.exercisesKey)
-//        do {
-//            let data = try Data(contentsOf: filename)
-//            self.exercises = try JSONDecoder().decode([Exercise].self, from: data)
-//        } catch {
-//            self.exercises = []
-//        }
-        
-//        let url = URL(string: "http://165.232.56.142:3004/exercise")!
-//        
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            do {
-//                if let data = data {
-//                    
-//                    let decodedResponse = try JSONDecoder().decode([Exercise].self, from: data)
-//                    
-//                    DispatchQueue.main.async {
-//                        self.exercises = decodedResponse
-//                    }
-//                } else {
-//                    print("No Data")
-//                }
-//            } catch {
-//                print("Error: \(error)")
-//            }
-//            
-//        }.resume()
-        
-        apiClient.fetch(Exercise.self) { (result) in
+        apiClient.fetchData(Exercise.self) { (result) in
             switch result {
             case .success(let exercises):
                 print(exercises.map { $0.name })
@@ -76,8 +32,6 @@ class Exercises: ObservableObject {
                 self.exercises = []
             }
         }
-        
-        
     }
     
     
@@ -95,11 +49,16 @@ class Exercises: ObservableObject {
     func add(_ exercise: Exercise) {
         DispatchQueue.main.async {
             self.exercises.append(exercise)
+            self.exercises.sort(by: { $0.name < $1.name })
         }
         //save()
     }
     
-    func delete(at offsets: IndexSet) {
-        exercises.remove(atOffsets: offsets)
+    func delete(at offset: Int) {
+        DispatchQueue.main.async {
+            self.exercises.remove(at: offset)
+        }
     }
+    
+    
 }
