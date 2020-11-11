@@ -67,6 +67,7 @@
 		C24ED0F424AE367000AABFDC /* ListExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24ED0F324AE367000AABFDC /* ListExerciseView.swift */; };
 		C26BB52725030CE600AE5F35 /* EditExercisePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26BB52625030CE600AE5F35 /* EditExercisePopup.swift */; };
 		C26BB529250801A600AE5F35 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26BB528250801A600AE5F35 /* APIClient.swift */; };
+		C29160F7255C61C2000A9A5A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C29160F6255C61C1000A9A5A /* README.md */; };
 		C2F4AD9D24F8311400BD439D /* CreateNewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F4AD9C24F8311300BD439D /* CreateNewExerciseView.swift */; };
 		C2F4AD9F24F97FFF00BD439D /* Workouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F4AD9E24F97FFF00BD439D /* Workouts.swift */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,7 @@
 		C24ED0F324AE367000AABFDC /* ListExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExerciseView.swift; sourceTree = "<group>"; };
 		C26BB52625030CE600AE5F35 /* EditExercisePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisePopup.swift; sourceTree = "<group>"; };
 		C26BB528250801A600AE5F35 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		C29160F6255C61C1000A9A5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C2F4AD9C24F8311300BD439D /* CreateNewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewExerciseView.swift; sourceTree = "<group>"; };
 		C2F4AD9E24F97FFF00BD439D /* Workouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workouts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +194,7 @@
 		C24A418A248A9EBC00B93834 = {
 			isa = PBXGroup;
 			children = (
+				C29160F6255C61C1000A9A5A /* README.md */,
 				C24A4195248A9EBC00B93834 /* WorkOut */,
 				C24A4194248A9EBC00B93834 /* Products */,
 			);
@@ -334,6 +337,7 @@
 				C20F4081249D184E00355F7C /* Pew.mp3 in Resources */,
 				C24A41A3248A9EBF00B93834 /* Preview Assets.xcassets in Resources */,
 				C20F40412494003500355F7C /* Beep.mp3 in Resources */,
+				C29160F7255C61C2000A9A5A /* README.md in Resources */,
 				C24A41A0248A9EBF00B93834 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
